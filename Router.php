@@ -1,0 +1,70 @@
+<?php
+
+namespace MVC;
+
+use App\Classes\Session;
+
+class Router
+{
+    public array $getRoutes = [];
+    public array $postRoutes = [];
+
+    public function get($url, $fn)
+    {
+        $this->getRoutes[$url] = $fn;
+    }
+
+    public function post($url, $fn)
+    {
+        $this->postRoutes[$url] = $fn;
+    }
+
+    public function comprobarRutas()
+{
+    Session::start();
+
+    $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+    $method = $_SERVER['REQUEST_METHOD'];
+
+    if ($method === 'GET') {
+        $fn = $this->getRoutes[$currentUrl] ?? null;
+    } else {
+        $fn = $this->postRoutes[$currentUrl] ?? null;
+    }
+
+    if ($fn) {
+        try {
+            if (is_array($fn)) {
+                call_user_func([new $fn[0], $fn[1]], $this);
+            } else {
+                call_user_func($fn, $this);
+            }
+        } catch (\Throwable $th) {
+            //Manejo del error, por ejemplo mostrar una pagina de error, o loggear el error.
+            echo "Ocurrio un error interno" ." Error: " . "$th";
+            error_log("Error en la ruta: " . $currentUrl . ". Error: " . $th);
+        }
+
+    } else {
+        // Manejar la ruta no encontrada
+        http_response_code(404);
+        echo "Página No Encontrada";
+    }
+}
+
+    public function render($view, $datos = [])
+    {
+
+        // Leer lo que le pasamos  a la vista
+        foreach ($datos as $key => $value) {
+            $$key = $value;  // Doble signo de dolar significa: variable variable, básicamente nuestra variable sigue siendo la original, pero al asignarla a otra no la reescribe, mantiene su valor, de esta forma el nombre de la variable se asigna dinamicamente
+        }
+
+        ob_start(); // Almacenamiento en memoria durante un momento...
+
+        // entonces incluimos la vista en el layout
+        include_once __DIR__ . "/app/views/$view.php";
+        $contenido = ob_get_clean(); // Limpia el Buffer
+        include_once __DIR__ . '/app/views/layout.php';
+    }
+}
