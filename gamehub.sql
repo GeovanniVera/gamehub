@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS videogame_genre (
 );
 
 -- Indices para mejorar el rendimiento (solo crea si no existen)
-CREATE INDEX IF NOT EXISTS idx_user_name ON user (user_name);
+CREATE INDEX IF NOT EXISTS idx_user_name ON user (name);
 CREATE INDEX IF NOT EXISTS idx_email ON user (email);
 CREATE INDEX IF NOT EXISTS idx_genre_name ON genre (name);
 CREATE INDEX IF NOT EXISTS idx_console_name ON console (name);

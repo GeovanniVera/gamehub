@@ -9,24 +9,20 @@ use MVC\Router;
 class AuthController{
     public static function login(Router $router){
         Middlewares::isAuth();
-        
         $data = [];
-
         if (Session::has('errores')) {
             $data['errores'] = Session::get('errores');
             Session::delete('errores');
         }
-
         if (Session::has('exitos')) {
             $data['exitos'] = Session::get('exitos');
             Session::delete('exitos');
         }
-
         $router->render('auth/login',$data);
     }   
 
     public static function loginProcess(){
-        ;
+        
     }
 
     public static function logout(){
