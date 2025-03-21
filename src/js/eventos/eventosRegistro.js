@@ -6,28 +6,23 @@ Encargado de gestionar los eventos del formulario.
 import { validarEmail } from './../validadores/validacionesLogin.js';
 import { validarFormatoAlfabetico, validarVacio } from '../validadores/validaciones.js';
 import { mostrarError, mostrarExito, habilitarBoton } from './../doms/dom.js';
-import { validarPasswordRegister, validarFormatoPassword, validarNumeroTelefonico } from '../validadores/validacionesRegistro.js';
+import { validarPasswordRegister, validarFormatoPassword } from '../validadores/validacionesRegistro.js';
 
 //inputs que se validaran del formulario
 const nombreInput = document.getElementById('name');
 const lastNameInput = document.getElementById('last_name');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
-const passwordVerifyInput = document.getElementById('passwordVerify');
-const phoneInput = document.getElementById('phone');
 
 //Funcion que inicializa los eventos 
 export function inicializarEventos() {
     lastNameInput.addEventListener('input', () => validarNombreGenerico(lastNameInput, 'last_name'));
     nombreInput.addEventListener('input', () => validarNombreGenerico(nombreInput, 'name'));
     emailInput.addEventListener('input', validarEmailEnTiempoReal);
-    phoneInput.addEventListener('input', validarTelefonoEnTiempoReal);
     passwordInput.addEventListener('input', validarPasswordEnTiempoReal);
-    passwordVerifyInput.addEventListener('input', validarConfirmacionPassword);
     document.querySelector('#registerForm').addEventListener('submit', manejarSubmit);
     window.addEventListener('load', () => habilitarBoton('registerForm',false)); // Deshabilitar botón al cargar
 }
-
 
 //Funcion que valida campos genericos se puede extraer en un futuro 
 function validarNombreGenerico(input, inputName) {
@@ -54,17 +49,6 @@ function validarEmailEnTiempoReal() {
     actualizarEstadoBoton();
 }
 
-function validarTelefonoEnTiempoReal() {
-    if (validarVacio(phoneInput.value)) {
-        mostrarError('phone', 'Porfavor ingresa un numero telefonico.')
-    } else if (!validarNumeroTelefonico(phoneInput.value)) {
-        mostrarError('phone', 'El formato del telefono debe ser como el siguiente +525611889450.')
-    } else {
-        mostrarExito('phone');
-    }
-    actualizarEstadoBoton();
-
-}
 
 function validarPasswordEnTiempoReal() {
     const password = passwordInput.value;
@@ -74,24 +58,9 @@ function validarPasswordEnTiempoReal() {
         mostrarError('password', 'La contraseña debe tener al menos 8 caracteres, incluir mayúsculas, minúsculas, un número y un símbolo especial.');
     } else {
         mostrarExito('password');
-        passwordVerifyInput.disabled = false;
     }
     actualizarEstadoBoton();
 }
-
-function validarConfirmacionPassword() {
-    if (validarVacio(passwordVerifyInput.value)) {
-        mostrarError('passwordVerify', 'Debes confirmar tu contraseña.');
-    } else if (passwordVerifyInput.value !== passwordInput.value) {
-        mostrarError('passwordVerify', 'Las contraseñas no coinciden.');
-    } else {
-        mostrarExito('passwordVerify');
-    }
-    actualizarEstadoBoton();
-}
-
-
-
 
 function manejarSubmit(event) {
     let errors = 0;
@@ -117,13 +86,6 @@ function manejarSubmit(event) {
         mostrarExito('password');
     }
 
-    if (passwordVerifyInput.value !== passwordInput.value) {
-        mostrarError('passwordVerify', 'Las contraseñas no coinciden.');
-        errors++;
-    } else {
-        mostrarExito('passwordVerify');
-    }
-
     if (errors > 0) {
         event.preventDefault();
     }
@@ -136,11 +98,9 @@ function actualizarEstadoBoton() {
 function sonTodosLosCamposValidos() {
     const nombreValido = !validarVacio(nombreInput.value) && validarFormatoAlfabetico(nombreInput.value);
     const apellidoValido = !validarVacio(lastNameInput.value) && validarFormatoAlfabetico(lastNameInput.value);
-    const telefonoValido = !validarVacio(phoneInput.value) && validarNumeroTelefonico(phoneInput.value);
     const emailValido = validarEmail(emailInput.value);
     const passwordValido = validarPasswordRegister(passwordInput.value);
-    const passwordCoincide = passwordInput.value === passwordVerifyInput.value;
-    return nombreValido && emailValido && passwordValido && passwordCoincide && apellidoValido && telefonoValido;
+    return nombreValido && emailValido && passwordValido && apellidoValido;
 }
 
 

@@ -8,7 +8,7 @@ use App\Classes\Session;
 use MVC\Router;
 use App\Models\User;
 
-class RegisterController
+class RegisterController extends BaseController
 {
     /**
      * Renderiza la vista de registro de usuario.
@@ -47,18 +47,17 @@ class RegisterController
                 $id = null;
             }
             
-            $userData = [
+            $data = [
                 'id' => $id, // Obtener el ID si existe (para actualizar).
                 'name' => $_POST['name'],
                 'last_name' => $_POST['last_name'],
                 'email' => $_POST['email'],
-                'phone' => $_POST['phone'],
                 'password' => $_POST['password']
             ];
 
 
             // 2. Validar datos.
-            $errores = self::validarDatos($userData);
+            $errores = self::validateData($data);
 
             if (!empty($errores)) {
                 Session::set('errores', $errores);
@@ -67,7 +66,7 @@ class RegisterController
             }
 
             // 3. Sanitizar datos.
-            $userData = self::sanitizateData($userData);
+            $userData = self::sanitizateData($data);
 
             // 4. Crear una instancia de Usuario.
             $user = User::arrayToObject($userData);
@@ -90,60 +89,26 @@ class RegisterController
         }
     }
 
-    /**
-     * Sanitiza los datos del usuario.
-     *
-     * Este método utiliza htmlspecialchars() para escapar caracteres especiales y trim() para
-     * eliminar espacios en blanco al principio y al final de cada valor.
-     *
-     * @param array $userData Los datos del usuario.
-     * @return array Los datos del usuario sanitizados.
-     */
-    private static function sanitizateData($userData)
-    {
-        foreach ($userData as $key => $value) {
-            // Sanitización general
-            $sanitizedValue = $value !== null
-                ? htmlspecialchars(trim($value), ENT_QUOTES, 'UTF-8')
-                : null;
-
-            // Sanitización especial para 'id'
-            if ($key === 'id') {
-                $sanitizedValue = ($sanitizedValue !== null && $sanitizedValue !== '')
-                    ? (int) $sanitizedValue  // Convertir a entero
-                    : null;
-            }
-
-            $userData[$key] = $sanitizedValue;
-        }
-        return $userData;
-    }
+    
 
 
     /**
      * Valida los datos del usuario.
      *
-     * @param array $userData Los datos del usuario.
+     * @param array $data Los datos del usuario.
      * @return array Un array de errores.
      */
-    private static function validarDatos($Data)
+    protected static function validateData($data)
     {
-        $errores = [];
-
+        $errors = [];
         // Revisar Vacíos
-        foreach($Data as $key => $value){
-            if($key == 'id') continue;
-            $errores[] = Validators::required($value, $key);
-        }
-
+        $errors = self::validateEmpties($data);
         // Revisar formatos
-        $errores[] = Validators::alfa($Data['name'], 'Nombre');
-        $errores[] = Validators::alfa($Data['last_name'], 'Apellido');
-        $errores[] = Validators::email($Data['email'], 'Email');
-        $errores[] = Validators::password($Data['password']);
-        $errores[] = Validators::telefono($Data['phone']);
-
+        $errors[] = Validators::alfa($data['name'], 'Nombre');
+        $errors[] = Validators::alfa($data['last_name'], 'Apellido');
+        $errors[] = Validators::email($data['email'], 'Email');
+        $errors[] = Validators::password($data['password']);
         // Filtrar valores vacíos para evitar NULLs en el array
-        return array_filter($errores);
+        return array_filter($errors);
     }
 }

@@ -17,7 +17,7 @@ class User extends ActiveRecord
 
     public static function getTable()
     {
-        return "user";
+        return "users";
     }
 
     /**
