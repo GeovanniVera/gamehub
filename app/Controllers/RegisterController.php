@@ -17,13 +17,9 @@ class RegisterController extends BaseController
      */
     public static function register(Router $router)
     {
+        Middlewares::isGuest();
         $data = [];
-
-        if (Session::has('errores')) {
-            $data['errores'] = Session::get('errores');
-            Session::delete('errores');
-        }
-
+        $data = extractMessages("errores");
         $router->render('auth/register', $data);
     }
 
@@ -39,9 +35,9 @@ class RegisterController extends BaseController
      */
     public static function saveUser()
     {
+        Middlewares::isGuest();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // 1. Obtener los datos del formulario.
-            Middlewares::isAuth();
             Session::start();
             if (!isset($_POST['id']) || $_POST['id'] == '') {
                 $id = null;
@@ -54,7 +50,6 @@ class RegisterController extends BaseController
                 'email' => $_POST['email'],
                 'password' => $_POST['password']
             ];
-
 
             // 2. Validar datos.
             $errores = self::validateData($data);

@@ -10,16 +10,10 @@ use MVC\Router;
 
 class AuthController extends BaseController{
     public static function login(Router $router){
-        Middlewares::isAuth();
+        Middlewares::isGuest();
         $data = [];
-        if (Session::has('errores')) {
-            $data['errores'] = Session::get('errores');
-            Session::delete('errores');
-        }
-        if (Session::has('exitos')) {
-            $data['exitos'] = Session::get('exitos');
-            Session::delete('exitos');
-        }
+        $data["errores"] = extractMessages("errores");
+        $data["exitos"] = extractMessages("exitos");
         $router->render('auth/login',$data);
     }   
 
@@ -29,21 +23,20 @@ class AuthController extends BaseController{
      * 
      */
     public static function loginProcess(){
+        Middlewares::isGuest();
         if($_SERVER['REQUEST_METHOD']=="POST"){
             $data = [
                 "email" => $_POST['email'],
                 "password"=> $_POST['password']
             ];
             $errors = self::validateData($data);
-            if(!empty($errors)){
-                Session::set("errores",$errors);
-                header("Location: /");
-                exit;
-            }
+            if(!empty($errors))redirect("errores",$errors,"/");
             $data = self::sanitizateData($data);
-            var_dump($data['email']);
             $user = User::where('email',$data['email']);
-            var_dump($user); 
+            if(!$user) redirect("errores",['Usuario no registrado.'],"/");
+            $password_verify = $user->verifyPassword($data['password']);
+            if(!$password_verify) redirect("errores",['Contraseña Incorrecta'],"/"); 
+            redirect("user",$user,"/dashboard");
         }        
     }
 

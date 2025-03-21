@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <main>
-        <?php echo $contenido; ?>
-    </main>
+    <?php echo $contenido; ?>
 </body>
 </html>
