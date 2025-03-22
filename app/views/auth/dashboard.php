@@ -1,13 +1,17 @@
-<header>
-    <div class="logo">
-        <h1>Game Hub</h1>
+<?php include __DIR__ . "/../includes/navbar.php" ?>
+<main>
+    <h2>Bienvenido descubre tu juego</h2>
+
+    <div class="contenedor dashbord-container">
+        <!--inicio de la card-->
+        <div class="cards">
+                <div class="card red">
+                    <p class="tip">Gears of War day E</p>
+                    <p class="second-text">Descripcion Aqui</p>
+                    <a href="/" class="button">ver mas</a>
+                </div>
+            </div>
+            <!-- fin card-->
     </div>
-    <nav>
-        <ul>
-            <li>Inicio</li>
-            <li>Generos</li>
-            <li>Consolas</li>
-            <li>Video-juegos</li>
-        </ul>
-    </nav>
-</header>
+</main>
+<?php include __DIR__ . "/../includes/footer.php" ?>
