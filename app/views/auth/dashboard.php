@@ -1,6 +1,6 @@
 <?php include __DIR__ . "/../includes/navbar.php" ?>
 <main>
-    <h2>Bienvenido descubre tu juego</h2>
+    <h2>Ultimos Agregados </h2>
 
     <div class="contenedor dashbord-container">
         <!--inicio de la card-->
