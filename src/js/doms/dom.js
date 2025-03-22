@@ -30,17 +30,6 @@ export function mostrarExito(campo) {
 }
 
 /**
- * 
- * @param {boolean} habilitar 
- */
-export function habilitarBotonRegister(habilitar) {
-    const submitButton = document.querySelector('#registerForm input[type="submit"]');
-    if (submitButton) {
-        submitButton.disabled = !habilitar;
-    }
-}
-
-/**
  * Habilita o deshabilita el botón de envío de un formulario.
  * @param {string} formId El ID del formulario.
  * @param {boolean} habilitar Indica si el botón debe estar habilitado (true) o deshabilitado (false).
