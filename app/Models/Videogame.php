@@ -48,15 +48,24 @@ class Videogame extends ActiveRecord
         try{
             $conn = Database::getInstance()->getConnection();
             $conn -> beginTransaction();
-            self::create($videogame);
+
+            //creamos el objeto de videojuego
+
+
+            //self::create($videogame);
+            debuguear($videogame);
+
             //recorremos todos los generos a los que se asocio el videojuego
-            foreach($genres as $genre){
+
+            for ($i = 0; $i < sizeof($genres['id']); $i++) {
                 $videogameGenre = VideogameGenre::arrayToObject([
-                    "idGenre" =>$genre['id'],
+                    "idGenre" => $genres['id'][$i],
                     "idVideogame" => $videogame->getId()
                 ]);
 
+                debuguear($videogameGenre);
                 $res = VideogameGenre::create($videogameGenre);
+
 
                 if(!$res){
                     $conn -> rollBack();
@@ -65,12 +74,14 @@ class Videogame extends ActiveRecord
 
             }
             
+            $i = 0;
             foreach($consoles as $console){
                 $videogameGenre = VideogameGenre::arrayToObject([
-                    "idConsole" =>$console['id'],
+                    "idConsole" => $console[$i],
                     "idVideogame" => $videogame->getId(),
                     'releaseDate' => $console['releaseDate']
                 ]);
+                $i++;
 
                 $res = VideogameGenre::create($videogameGenre);
 

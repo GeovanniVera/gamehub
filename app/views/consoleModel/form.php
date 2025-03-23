@@ -18,7 +18,7 @@
             <a href="/consoleModel" class="btn-agregar">Cancelar</a>
         </div>
 
-        <form action="<?php echo isset($model) && !empty($model) ? '/consoleModelUpdate':'/consoleModel' ?>" method="post">
+        <form action="<?php echo isset($model) && !empty($model) ? '/consoleModelUpdate':'/consoleModel' ?>" method="post" class="form-crud">
             <?php if(isset($model) && !empty($model)): ?>
                     <div class="grupo">
                         <input type="hidden" name="id" value="<?php echo $model->getId() ?>">
@@ -26,15 +26,20 @@
                 <?php endif; ?>
             
             <div class="grupo">
-                <div class="inp">
-                    <label for="name">
-                        Nombre
+                <div class="campos">
+                <label for="name">
+                        Modelo de consola:
                     </label>
-                    <input type="text" placeholder="Xbox series S" name="name" value="<?php echo isset($model) && !empty($model) ? htmlspecialchars($model->getName()) : '' ?>">
+                    <div class="inp">
+                        <input type="text" placeholder="Xbox series S" name="name" value="<?php echo isset($model) && !empty($model) ? htmlspecialchars($model->getName()) : '' ?>">
+                    </div>
                 </div>
+                <span id="nameError" class="error-message"></span>
             </div>
             <div class="grupo">
-                <input type="submit" value="Guardar" class="btn_submit">
+                <div class="campos">
+                    <input type="submit" value="Guardar" class="submit">
+                </div>
             </div>
         </form>
         <!-- fin card-->

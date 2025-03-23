@@ -7,6 +7,8 @@ use App\Controllers\BaseController;
 use App\Classes\Middlewares;
 use App\Classes\Validators;
 use App\Interfaces\CrudInterface;
+use App\Models\Console;
+use App\Models\Genre;
 use App\Models\Videogame;
 
 class VideogameController extends BaseController implements CrudInterface
@@ -27,19 +29,41 @@ class VideogameController extends BaseController implements CrudInterface
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="POST"){
-            $data = [
+            
+
+            //se recuperan los datos de la base de datos 
+            $videogame = [
                 "name" => $_POST['name'],
                 "description" => $_POST['description'],
             ];
-            $errors = self::validateData($data);
-            if (!empty($errors)) redirect("errores", $errors, "/videogames");
-            $data = self::sanitizateData($data);
-            $videogame = Videogame::arrayToObject($data);
+
+            $genres['id'] =$_POST['genres'];
+
+            $consoles['id'] = $_POST['consoles'];
+            $consoles['releaseDate'] = $_POST['releaseDate'];
+
+            //se validan los datos
+            $errors = self::validateData($videogame);
+            $errors = self::validateData($consoles);
+            $errors = self::validateData($genres);
+
+            if (!empty($errors)) redirect("errores", $errors, "/videogamescreate");
+
+            //se sanitizan los datos
+            $videogame = self::sanitizateData($videogame);
+
+            //se mapean los objetos
+            $videogame = Videogame::arrayToObject($videogame);
             $nameexist = Videogame::where("name", $videogame->getName());
+
+            //se verifica que no exista en la base de datos
             if (!(is_null($nameexist))) redirect("errores", ["Videojuego Existente en la Base de Datos"], "/videogames");
-            if (!Videogame::save($videogame)) {
+            
+            //Se guardara el videojuego por medio de una trasaccion
+            if (!Videogame::createVideoGame($videogame,$genres,$consoles)) {
                 redirect("errores", ["Error al guardar en la Base de Datos"], "/videogames");
             }
+
             redirect("exitos", ["Videojuego creado correctamente"], "/videogames");
         }
     }
@@ -50,6 +74,8 @@ class VideogameController extends BaseController implements CrudInterface
         $data["exitos"]=extractMessages("exitos");
         $data["mensajes"]=extractMessages("mensajes");
         $data["errores"]=extractMessages("errores");
+        $data["genres"]=Genre::all();
+        $data['consoles']=Console::all();
         $router -> render("videogames/form", $data);
     }
     public static function delete()
@@ -97,7 +123,6 @@ class VideogameController extends BaseController implements CrudInterface
     {
         $errors = [];
         $errors[] = self::validateEmpties($data);
-        $errors[] = Validators::alfa($data["name"], "nombre");
         return array_filter($errors);
     }
 }

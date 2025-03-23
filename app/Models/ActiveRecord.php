@@ -141,7 +141,7 @@ class ActiveRecord
      * @param object $model
      * @return bool
      */
-    public static function create(object $model): bool
+    public static function create(object $model): array
     {
         try {
             $conn = Database::getInstance()->getConnection();
@@ -158,10 +158,17 @@ class ActiveRecord
                 $stmt->bindValue(':' . $key, $value, $paramType);
             }
 
-            return $stmt->execute();
+            $res =  $stmt->execute();
+
+            return [
+                'res' => $res,
+                'id' => $conn->lastInsertId()
+            ];
         } catch (PDOException $e) {
             error_log($e->getMessage());
-            return false;
+            return [
+                'res' => false
+            ];
         }
     }
 
