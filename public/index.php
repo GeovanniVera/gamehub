@@ -30,17 +30,21 @@ $router->get('/dashboard',[DashboardController::class,'index']);
 //Generos
 $router->get('/genre',[GenreController::class,'index']);
 $router->get('/genreUsuario',[GenreController::class,'create']);
+$router->get('/genrecreate',[GenreController::class,'form']);
 
 //Consolas
 $router->get('/console',[ConsoleController::class,'index']);
 $router->get('/consoleSave',[ConsoleController::class,'create']);
+$router->get('/consolecreate',[GenreController::class,'form']);
 
 //Modelo de las consolas
 $router->get('/consoleModel',[ModelController::class,'index']);
+$router->get('/consoleModelcreate',[GenreController::class,'form']);
 $router->get('/consoleModelSave',[ModelController::class,'create']);
 
-//Modelo de las consolas
+//Modelo de los videojuegos
 $router->get('/videogames',[VideogameController::class,'index']);
+$router->get('/videogamescreate',[GenreController::class,'form']);
 $router->get('/videogamesSave',[VideogameController::class,'create']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador

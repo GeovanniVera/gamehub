@@ -47,4 +47,13 @@ class GenreController extends BaseController {
         $res = Genre::save($genre);
         redirect("mensajes",["Genero creado correctamente"],"/genre");
     }
+
+    public static function form(Router $router){
+        Middlewares::isAuth();
+        $data = [];
+        $data["exitos"]=extractMessages("exitos");
+        $data["mensajes"]=extractMessages("mensajes");
+        $data["errores"]=extractMessages("errores");
+        $router -> render("genre/form", $data);
+    }
 }

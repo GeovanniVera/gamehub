@@ -18,7 +18,7 @@ include __DIR__ . "/../includes/navbar.php" ?>
         <?php endif; ?>
         <!--inicio de la card-->
         <div class="btn">
-            <a href="" class="btn-agregar">Agregar Género</a>
+            <a href="/genrecreate" class="btn-agregar">Agregar Género</a>
         </div>
         <table class="table" rules=”groups”>
             <thead>
