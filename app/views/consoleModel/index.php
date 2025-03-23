@@ -22,7 +22,7 @@
                 <tr>
                     <th>id</th>
                     <th>Nombre</th>
-                    <th colspan="3">Acciones</th>
+                    <th colspan="2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,9 +31,8 @@
                         <tr>
                             <td><?php echo $consoleModel->getId() ?></td>
                             <td><?php echo $consoleModel->getName() ?></td>
-                            <td><a href="/consoleModelDetails?id=<?php echo $consoleModel->getId() ?>">Detalles</a></td>
-                            <td><a href="/consoleModelDelete?id=<?php echo $consoleModel->getId() ?>">Eliminar</a></td>
-                            <td><a href="/consoleModelUpdate?id=<?php echo $consoleModel->getId() ?>">Actualizar</a></td>
+                            <td><a href="/consoleModelDelete?id=<?php echo $consoleModel->getId() ?>"><i class="fas fa-trash trash"></i></i></a></td>
+                            <td><a href="/consoleModelUpdate?id=<?php echo $consoleModel->getId() ?>"><i class="fas fa-pencil-alt update"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

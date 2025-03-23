@@ -53,3 +53,4 @@ phpunit.xml.dist
 *.tmp
 
 info.php
+.qodo

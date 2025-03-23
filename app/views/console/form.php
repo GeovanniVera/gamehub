@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\Console;
-
- include __DIR__ . '/../includes/navbar.php' ?>
+include __DIR__ . '/../includes/navbar.php' ?>
 
 <main>
     <div class="contenedor crud-container">

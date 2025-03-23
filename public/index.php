@@ -44,7 +44,6 @@ $router->get('/consolecreate',[ConsoleController::class,'form']);
 $router->get('/consoleModel',[ModelController::class,'index']);
 $router->get('/consoleModelUpdate',[ModelController::class,'update']);
 $router->post('/consoleModelUpdate',[ModelController::class,'updateProcess']);
-$router->get('/consoleModelDetails',[ModelController::class,'details']);
 $router->get('/consoleModelDelete',[ModelController::class,'delete']);
 $router->post('/consoleModel',[ModelController::class,'create']);
 $router->get('/consoleModelcreate',[ModelController::class,'form']);

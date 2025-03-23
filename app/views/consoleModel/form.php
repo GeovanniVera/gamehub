@@ -18,13 +18,19 @@
             <a href="/consoleModel" class="btn-agregar">Cancelar</a>
         </div>
 
-        <form action="/consoleModel" method="post">
+        <form action="<?php echo isset($model) && !empty($model) ? '/consoleModelUpdate':'/consoleModel' ?>" method="post">
+            <?php if(isset($model) && !empty($model)): ?>
+                    <div class="grupo">
+                        <input type="hidden" name="id" value="<?php echo $model->getId() ?>">
+                    </div>
+                <?php endif; ?>
+            
             <div class="grupo">
                 <div class="inp">
                     <label for="name">
                         Nombre
                     </label>
-                    <input type="text" placeholder="Xbox series S" name="name">
+                    <input type="text" placeholder="Xbox series S" name="name" value="<?php echo isset($model) && !empty($model) ? htmlspecialchars($model->getName()) : '' ?>">
                 </div>
             </div>
             <div class="grupo">
