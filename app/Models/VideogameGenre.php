@@ -24,20 +24,20 @@ class VideogameGenre extends ActiveRecord
 
     public function setIdGenre($id)
     {
-        $this->id = $id;
+        $this->idGenre = $id;
     }
 
     public function getIdGenre()
     {
-        return $this->id;
+        return $this->idGenre;
     }
     public function setIdVideogame($id)
     {
-        $this->id = $id;
+        $this->idVideogame = $id;
     }
 
     public function getIdVideogame()
     {
-        return $this->id;
+        return $this->idVideogame;
     }
 }

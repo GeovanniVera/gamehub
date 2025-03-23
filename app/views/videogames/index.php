@@ -22,7 +22,7 @@
                 <tr>
                     <th>id</th>
                     <th>Nombre</th>
-                    <th colspan="2">Acciones</th>
+                    <th colspan="3">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +31,7 @@
                         <tr>
                             <td><?php echo $videogame->getId() ?></td>
                             <td><?php echo $videogame->getName() ?></td>
+                            <td><a href="/videogamesDetails?id=<?php echo $videogame->getId()?>"><i class="fas fa-eye view"></i></a></td>
                             <td><a href="/videogamesDelete?id=<?php echo $videogame->getId()?>"><i class="fas fa-trash trash"></i></a></td>
                             <td><a href="/videogamesUpdate?id=<?php echo $videogame->getId()?>"><i class="fas fa-pencil-alt update"></a></td>
                         </tr>

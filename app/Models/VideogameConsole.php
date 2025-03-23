@@ -33,22 +33,22 @@ class VideogameConsole extends ActiveRecord
         return $this->id;
     }
 
-    public function setIdGenre($id)
+    public function setIdConsole($id)
     {
-        $this->id = $id;
+        $this->idConsole = $id;
     }
 
-    public function getIdGenre()
+    public function getIdConsole()
     {
-        return $this->id;
+        return $this->idConsole;
     }
     public function setIdVideogame($id)
     {
-        $this->id = $id;
+        $this->idVideogame = $id;
     }
 
     public function getIdVideogame()
     {
-        return $this->id;
+        return $this->idVideogame;
     }
 }
