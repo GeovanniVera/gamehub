@@ -20,37 +20,36 @@ class Router
     }
 
     public function comprobarRutas()
-{
-    Session::start();
+    {
+        Session::start();
 
-    $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
-    $method = $_SERVER['REQUEST_METHOD'];
+        $currentUrl = $_SERVER['PATH_INFO'] ?? '/';
+        $method = $_SERVER['REQUEST_METHOD'];
 
-    if ($method === 'GET') {
-        $fn = $this->getRoutes[$currentUrl] ?? null;
-    } else {
-        $fn = $this->postRoutes[$currentUrl] ?? null;
-    }
-
-    if ($fn) {
-        try {
-            if (is_array($fn)) {
-                call_user_func([new $fn[0], $fn[1]], $this);
-            } else {
-                call_user_func($fn, $this);
-            }
-        } catch (\Throwable $th) {
-            //Manejo del error, por ejemplo mostrar una pagina de error, o loggear el error.
-            echo "Ocurrio un error interno" ." Error: " . "$th";
-            error_log("Error en la ruta: " . $currentUrl . ". Error: " . $th);
+        if ($method === 'GET') {
+            $fn = $this->getRoutes[$currentUrl] ?? null;
+        } else {
+            $fn = $this->postRoutes[$currentUrl] ?? null;
         }
 
-    } else {
-        // Manejar la ruta no encontrada
-        http_response_code(404);
-        echo "Página No Encontrada";
+        if ($fn) {
+            try {
+                if (is_array($fn)) {
+                    call_user_func([new $fn[0], $fn[1]], $this);
+                } else {
+                    call_user_func($fn, $this);
+                }
+            } catch (\Throwable $th) {
+                //Manejo del error, por ejemplo mostrar una pagina de error, o loggear el error.
+                echo "Ocurrio un error interno" . " Error: " . "$th";
+                error_log("Error en la ruta: " . $currentUrl . ". Error: " . $th);
+            }
+        } else {
+            // Manejar la ruta no encontrada
+            http_response_code(404);
+            echo "Página No Encontrada";
+        }
     }
-}
 
     public function render($view, $datos = [])
     {
