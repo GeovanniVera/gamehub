@@ -7,7 +7,8 @@
             <li><a href="/">Inicio</a></li>
             <li><a href="/genre">Generos</a></li>
             <li><a href="/console">Consolas</a></li>
-            <li><a href="/video">Video-juegos</a></li>
+            <li><a href="/consoleModel">Modelos consolas</a></li>
+            <li><a href="/videogames">Video-juegos</a></li>
             <li><a href="/logout">Cerrar Sesion</a></li>
         </ul>
     </nav>
