@@ -29,7 +29,7 @@ $router->get('/dashboard',[DashboardController::class,'index']);
 
 //Generos
 $router->get('/genre',[GenreController::class,'index']);
-$router->get('/genreUsuario',[GenreController::class,'create']);
+$router->post('/genre',[GenreController::class,'create']);
 $router->get('/genrecreate',[GenreController::class,'form']);
 
 //Consolas
