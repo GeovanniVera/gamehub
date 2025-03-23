@@ -7,6 +7,17 @@ class VideogameConsole extends ActiveRecord
     protected ?int $id = null;
     protected int $idConsole;
     protected int $idVideogame;
+    protected string $releaseDate;
+
+
+    public function setReleaseDate($releaseDate){
+        $this->releaseDate = $releaseDate;
+
+    }
+
+    public function getReleaseDate(){
+        return $this->releaseDate;
+    }
 
     public static function getTable()
     {

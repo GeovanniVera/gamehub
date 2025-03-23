@@ -68,7 +68,8 @@ class Videogame extends ActiveRecord
             foreach($consoles as $console){
                 $videogameGenre = VideogameGenre::arrayToObject([
                     "idConsole" =>$console['id'],
-                    "idVideogame" => $videogame->getId()
+                    "idVideogame" => $videogame->getId(),
+                    'releaseDate' => $console['releaseDate']
                 ]);
 
                 $res = VideogameGenre::create($videogameGenre);
