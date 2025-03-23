@@ -9,6 +9,7 @@ use App\Controllers\GenreController;
 use App\Controllers\ConsoleController;
 use App\Controllers\ModelController;
 use App\Controllers\VideogameController;
+use App\Models\Videogame;
 use MVC\Router;
 
 $router = new Router();
@@ -28,7 +29,10 @@ $router->get('/dashboard',[DashboardController::class,'index']);
 
 //Generos
 $router->get('/genre',[GenreController::class,'index']);
-$router->get('/genreUsuario',[GenreController::class,'create']);
+$router->post('/genre',[GenreController::class,'create']);
+$router->get('/genreUpdate',[GenreController::class,'update']);
+$router->post('/genreUpdate',[GenreController::class,'updateProcess']);
+$router->get('/genreDelete',[GenreController::class,'delete']);
 $router->get('/genrecreate',[GenreController::class,'form']);
 
 //Consolas
@@ -51,8 +55,11 @@ $router->get('/consoleModelcreate',[ModelController::class,'form']);
 
 //Modelo de los videojuegos
 $router->get('/videogames',[VideogameController::class,'index']);
-$router->get('/videogamescreate',[VideogameController::class,'form']);
 $router->post('/videogames',[VideogameController::class,'create']);
+$router->get('/videogamesUpdate',[VideogameController::class,'update']);
+$router->post('/videogamesUpdate',[VideogameController::class,'updateProcess']);
+$router->get('/videogamesDelete',[VideogameController::class,'delete']);
+$router->get('/videogamescreate',[VideogameController::class,'form']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

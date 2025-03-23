@@ -52,9 +52,41 @@ class VideogameController extends BaseController implements CrudInterface
         $data["errores"]=extractMessages("errores");
         $router -> render("videogames/form", $data);
     }
-    public static function delete() {}
+    public static function delete()
+    {
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $id = $_GET['id'];
+            if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/videogames");
+            if(!Videogame::delete($id)) redirect("errores",["No se pudo eliminar el registro"],"/videogames");
+            redirect("exitos",["Genero Eliminado Correctamente"],"/videogames");
+        }
+    }
 
-    public static function update() {}
+    public static function update(Router $router)
+    {
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $id = $_GET['id'];
+            if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/videogames");
+            $videogame = Videogame::find($_GET['id']);
+            if(is_null($videogame)) redirect("errores",["Registro no existe"],"/videogames");
+            $data=[];
+            $data['videogame']= $videogame;
+            $router->render("videogames/form",$data);
+
+        }
+    }
+
+    public static function updateProcess()
+    {
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            $videogame = Videogame::arrayToObject($_POST);
+            if(!Videogame::save($videogame)) redirect("errores",["El registro no se pudo actualizar"],"/videogames");
+            redirect("exitos",["Genero actualizado correctamente"],"/videogames");
+        }
+    }
 
     /**
      * Metodo que valida datos

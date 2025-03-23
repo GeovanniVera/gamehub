@@ -20,24 +20,29 @@ include __DIR__ . "/../includes/navbar.php" ?>
         <div class="btn">
             <a href="/genre" class="btn-agregar">Cancelar</a>
         </div>
-        
 
-        <form action="/genre" method="post">
+
+        <form action="<?php echo isset($genre) && !empty($genre) ? '/genreUpdate' : '/genre' ?>" method="post">
+            <div class="grupo">
+                <?php if (isset($genre) && !empty($genre)): ?>
+                    <input type="hidden" name="id" value="<?php echo $genre->getId() ?>">
+                <?php endif; ?>
+            </div>
             <div class="grupo">
                 <div class="inp">
                     <label for="name">
                         Nombre
                     </label>
-                    <input type="text" placeholder="Terror, Accion, etc." name="name"
+                    <input type="text" placeholder="Terror, Accion, etc." name="name" value="<?php echo isset($genre) && !empty($genre) ? htmlspecialchars($genre->getName()) : '' ?>" 
+                        </div>
+                    <div class="inp">
+                        <label for="description">Descripcion</label>
+                        <textarea name="description" id="description"><?php echo isset($genre) && !empty($genre) ? htmlspecialchars($genre->getDescription()) : '' ?></textarea>
+                    </div>
                 </div>
-                <div class="inp">
-                    <label for="description">Descripcion</label>
-                    <input type="text" placeholder="Descripcion del Genero" name="description">
+                <div class="grupo">
+                    <input type="submit" value="Guardar" class="btn_submit">
                 </div>
-            </div>
-            <div class="grupo">
-                <input type="submit" value="Guardar" class="btn_submit">
-            </div>
         </form>
         <!-- fin card-->
     </div>
