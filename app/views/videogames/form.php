@@ -19,15 +19,20 @@
             <a href="/videogames" class="btn-agregar">Cancelar</a>
         </div>
         <div class="card">
-            <form action="/videogames" method="post">
+            <form action="<?php echo isset($videogame) && !empty($videogame) ? '/videogamesUpdate' : '/videogames' ?>" method="post">
+                <div class="grupo">
+                    <?php if (isset($videogame) && !empty($videogame)): ?>
+                        <input type="hidden" name="id" value="<?php echo $videogame->getId() ?>">
+                    <?php endif; ?>
+                </div>
                 <div class="grupo">
                     <div class="inp">
                         <label for="name">Nombre del Videojuego</label>
-                        <input type="text" placeholder="Minecraft, Halo, etc" name="name">
+                        <input type="text" placeholder="Minecraft, Halo, etc" name="name" value="<?php echo isset($videogame) && !empty($videogame) ? htmlspecialchars($videogame->getName()) : '' ?>">
                     </div>
                     <div class="inp">
                         <label for="description">Descripción</label>
-                        <input type="text" placeholder="Descripción del Videojuego" name="description">
+                        <textarea name="description" id="description"> <?php echo isset($videogame) && !empty($videogame) ? htmlspecialchars($videogame->getDescription()) : '' ?></textarea>
                     </div>
                 </div>
                 <div class="grupo">

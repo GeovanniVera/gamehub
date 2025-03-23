@@ -25,7 +25,7 @@ include __DIR__ . "/../includes/navbar.php" ?>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th colspan="3">Acciones</th>
+                    <th colspan="2">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,9 +34,8 @@ include __DIR__ . "/../includes/navbar.php" ?>
                         <tr>
                             <td><?php echo $genre->getId(); ?></td>
                             <td><?php echo $genre->getName(); ?></td>
-                            <td><a href="">Detalles</a></td>
-                            <td><a href="">Eliminar</a></td>
-                            <td><a href="">Actualizar</a></td>
+                            <td><a href="/genreDelete?id=<?php echo $genre->getId() ?>"><i class="fas fa-trash trash"></i></a></td>
+                            <td><a href="/genreUpdate?id=<?php echo $genre->getId() ?>"><i class="fas fa-pencil-alt update"></a></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
