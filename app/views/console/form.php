@@ -1,4 +1,8 @@
-<?php include __DIR__ . '/../includes/navbar.php' ?>
+<?php
+
+use App\Models\Console;
+
+ include __DIR__ . '/../includes/navbar.php' ?>
 
 <main>
     <div class="contenedor crud-container">
@@ -13,20 +17,31 @@
         <?php if (isset($mensajes) && !empty($mensajes)) : ?>
             <p class="alerta mensaje"><?php echo $mensajes ?></p>
         <?php endif; ?>
-        <!--inicio de la tabla-->
+
         <div class="btn">
             <a href="/console" class="btn-agregar">Cancelar</a>
         </div>
 
-        <form action="/console" method="post">
+        <form action="<?php echo isset($console) && !empty($console) ? '/consoleUpdate':'/console' ?>" method="post">
+            <div class="grupo">
+                <?php if(isset($console) && !empty($console)): ?>
+                    <input type="hidden" name="id" value="<?php echo $console->getId() ?>">
+                <?php endif; ?>
+            </div>
             <div class="grupo">
                 <div class="inp">
                     <label for="name">Nombre:</label>
-                    <input type="text" placeholder="XBOX" id="name" name="name">
+                    <input
+                        type="text"
+                        placeholder="XBOX"
+                        id="name"
+                        name="name"
+                        value="<?php echo isset($console) && !empty($console) ? htmlspecialchars($console->getName()) : '' ?>"
+                    >
                 </div>
                 <div class="inp">
-                    <label for="description"></label>
-                    <textarea name="description" id="description"></textarea>
+                    <label for="description">Descripción:</label>
+                    <textarea name="description" id="description"><?php echo isset($console) && !empty($console) ? htmlspecialchars($console->getDescription()) : '' ?></textarea>
                 </div>
             </div>
             <div class="grupo">
@@ -34,25 +49,24 @@
                     <label for="idModel">Modelo:</label>
                     <select name="idModel" id="idModel">
                         <?php if (isset($modelos) && !empty($modelos)) : ?>
-                            <option value="" disabled selected>--selecciona un modelo--</option>
-                            <?php foreach($modelos as $model):?>
-                                <option value="<?php echo $model->getid() ?>"><?php echo $model->getName() ?></option>
+                            <option value="" disabled <?php if (!isset($console) || empty($console->getIdModel())) echo 'selected'; ?>>--selecciona un modelo--</option>
+                            <?php foreach ($modelos as $model) : ?>
+                                <option value="<?php echo htmlspecialchars($model->getid()) ?>" <?php if (isset($console) && $console->getIdModel() == $model->getid()) echo 'selected'; ?>><?php echo htmlspecialchars($model->getName()) ?></option>
                             <?php endforeach; ?>
-                        <?php else: ?>
+                        <?php else : ?>
                             <option value="" disabled selected>--NO EXISTEN MODELOS--</option>
                         <?php endif; ?>
                     </select>
                 </div>
                 <div class="inp">
-                    <label for="releaseDate">Fecha de lanzamiento</label>
-                    <input type="date" name="releaseDate" id="releaseDate">
+                    <label for="releaseDate">Fecha de lanzamiento:</label>
+                    <input type="date" name="releaseDate" id="releaseDate" value="<?php echo isset($console) && !empty($console) ? htmlspecialchars($console->getReleaseDate()) : '' ?>">
                 </div>
             </div>
             <div class="grupo">
                 <input type="submit" value="Guardar" class="btn_submit">
             </div>
         </form>
-        <!-- fin card-->
     </div>
 </main>
 

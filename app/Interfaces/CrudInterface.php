@@ -7,5 +7,7 @@ interface CrudInterface {
     public static function index(Router $router);
     public static function create();
     public static function delete();
-    public static function update();
+    public static function update(Router $router);
+    public static function updateProcess();
+
 }

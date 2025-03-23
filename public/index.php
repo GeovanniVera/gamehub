@@ -9,8 +9,6 @@ use App\Controllers\GenreController;
 use App\Controllers\ConsoleController;
 use App\Controllers\ModelController;
 use App\Controllers\VideogameController;
-use App\Models\Model;
-use App\Models\Videogame;
 use MVC\Router;
 
 $router = new Router();
@@ -30,17 +28,24 @@ $router->get('/dashboard',[DashboardController::class,'index']);
 
 //Generos
 $router->get('/genre',[GenreController::class,'index']);
-$router->post('/genre',[GenreController::class,'create']);
+$router->get('/genreUsuario',[GenreController::class,'create']);
 $router->get('/genrecreate',[GenreController::class,'form']);
 
 //Consolas
 $router->get('/console',[ConsoleController::class,'index']);
 $router->post('/console',[ConsoleController::class,'create']);
+$router->get('/consoleUpdate',[ConsoleController::class,'update']);
+$router->post('/consoleUpdate',[ConsoleController::class,'updateProcess']);
+$router->get('/consoleDetails',[ConsoleController::class,'details']);
+$router->get('/consoleDelete',[ConsoleController::class,'delete']);
 $router->get('/consolecreate',[ConsoleController::class,'form']);
 
 //Modelo de las consolas
 $router->get('/consoleModel',[ModelController::class,'index']);
 $router->get('/consoleModelUpdate',[ModelController::class,'update']);
+$router->post('/consoleModelUpdate',[ModelController::class,'updateProcess']);
+$router->get('/consoleModelDetails',[ModelController::class,'details']);
+$router->get('/consoleModelDelete',[ModelController::class,'delete']);
 $router->post('/consoleModel',[ModelController::class,'create']);
 $router->get('/consoleModelcreate',[ModelController::class,'form']);
 

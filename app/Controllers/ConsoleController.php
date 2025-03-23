@@ -10,7 +10,7 @@ use App\Interfaces\CrudInterface;
 use App\Models\Console;
 use App\Models\Model;
 
-class ConsoleController extends BaseController  {
+class ConsoleController extends BaseController implements CrudInterface {
 
 
     public static function index (Router $router){
@@ -53,15 +53,59 @@ class ConsoleController extends BaseController  {
         $data["modelos"]= Model::all();
         $router -> render("console/form", $data);
     }
-    public static function delete($id)
+    public static function details(Router $router){
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $id = $_GET['id'];
+            if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/console");
+            $console = Console::find($_GET['id']);
+            if(is_null($console)) redirect("errores",["Registro no existe"],"/console");
+            $model = Model::find($console->getIdModel());
+            $data=[];
+            $data['console']= $console;
+            $data['model'] = $model;
+            $router->render("console/details",$data);
+        }
+        
+    }
+    public static function delete()
     {
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD'] =="GET"){
+            $id = $_GET['id'];
+            if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/console");
+            if(!Console::delete($id)) redirect("errores",["No se pudo eliminar el registro"],"/console");
+            redirect("exitos",["Registro Eliminado Correctamente"],"/console");
+        }
         
     }
 
-    public static function update($id)
+    public static function update(Router $router)
     {
-        var_dump($id);
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $id = $_GET['id'];
+            if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/console");
+            $console = Console::find($_GET['id']);
+            if(is_null($console)) redirect("errores",["Registro no existe"],"/console");
+            $data=[];
+            $data['console']= $console;
+            $data["modelos"]= Model::all();
+            $router->render("console/form",$data);
+
+        }
     }
+
+    public static function updateProcess()
+    {
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            $console = Console::arrayToObject($_POST);
+            if(!Console::save($console)) redirect("errores",["El registro no se pudo actualizar"],"/console");
+            redirect("exitos",["Consola actualizada correctamente"],"/console");
+        }
+    }
+
 
     /**
      * Metodo que valida datos

@@ -26,8 +26,8 @@ class ModelController extends BaseController implements CrudInterface
     public static function create()
     {
         Middlewares::isAuth();
-        if($_SERVER['REQUEST_METHOD']=="POST"){
-            
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
             $data = [
                 "name" => $_POST['name']
             ];
@@ -44,23 +44,51 @@ class ModelController extends BaseController implements CrudInterface
         }
     }
 
-    public static function form(Router $router){
+    public static function form(Router $router)
+    {
         Middlewares::isAuth();
         $data = [];
-        $data["exitos"]=extractMessages("exitos");
-        $data["mensajes"]=extractMessages("mensajes");
-        $data["errores"]=extractMessages("errores");
-        $router -> render("consoleModel/form", $data);
+        $data["exitos"] = extractMessages("exitos");
+        $data["mensajes"] = extractMessages("mensajes");
+        $data["errores"] = extractMessages("errores");
+        $router->render("consoleModel/form", $data);
     }
-
+    public static function details(Router $router)
+    {
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $id = $_GET['id'];
+            if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/console");
+            $model = Model::find($_GET['id']);
+            if(is_null($model)) redirect("errores",["Registro no existe"],"/console");
+            $data=[];
+            $data['model']= $model;
+            $router->render("console/details",$data);
+        }
+    }
     public static function delete()
     {
-        
+        Middlewares::isAuth();
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            echo "eliminando";
+        }
     }
 
-    public static function update()
+    public static function update(Router $router)
     {
-        
+        Middlewares::isAuth();
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+
+            echo "renderizando la vista";
+        }
+    }
+
+    public static function updateProcess()
+    {
+        Middlewares::isAuth();
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            echo "procesando la actualizacion";
+        }
     }
 
     /**

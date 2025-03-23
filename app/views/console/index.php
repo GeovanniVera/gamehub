@@ -35,9 +35,9 @@
                             <td><?php echo $console['consoleName'] ?></td>
                             <td><?php echo $console['modelo'] ?></td>
                             <td><?php echo $console['releaseDate'] ?></td>
-                            <td><a href="">Detalles</a></td>
-                            <td><a href="">Eliminar</a></td>
-                            <td><a href="/consoleUpdate/<?php echo $console['consoleId'] ?>">Actualizar</a></td>
+                            <td><a href="/consoleDetails?id=<?php echo $console['consoleId'] ?>">Detalles</a></td>
+                            <td><a href="/consoleDelete?id=<?php echo $console['consoleId'] ?>">Eliminar</a></td>
+                            <td><a href="/consoleUpdate?id=<?php echo $console['consoleId'] ?>">Actualizar</a></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

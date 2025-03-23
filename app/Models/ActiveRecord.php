@@ -209,7 +209,21 @@ class ActiveRecord
             return false;
         }
     }
-
+    
+    public static function delete(int $id){
+        try {
+            $query = "DELETE FROM " . static::getTable() . " WHERE id = :id";
+            $conn = Database::getInstance()->getConnection();
+            $stmt = $conn->prepare($query);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            return $stmt->execute();
+            
+        } catch (PDOException $e) {
+            $message = "Error al Eliminar el registro la base de datos:  {$e->getMessage()} en la linea {$e->getLine()}";
+            error_log($message);
+            return null;
+        }
+    }
 
     /**
      * Metodos estaticos auxiliares para el manejo de datos, mapeos o conversiones

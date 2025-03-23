@@ -31,8 +31,8 @@
                         <tr>
                             <td><?php echo $consoleModel->getId() ?></td>
                             <td><?php echo $consoleModel->getName() ?></td>
-                            <td><a href="">Detalles</a></td>
-                            <td><a href="">Eliminar</a></td>
+                            <td><a href="/consoleModelDetails?id=<?php echo $consoleModel->getId() ?>">Detalles</a></td>
+                            <td><a href="/consoleModelDelete?id=<?php echo $consoleModel->getId() ?>">Eliminar</a></td>
                             <td><a href="/consoleModelUpdate?id=<?php echo $consoleModel->getId() ?>">Actualizar</a></td>
                         </tr>
                     <?php endforeach; ?>
