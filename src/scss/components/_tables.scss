@@ -1,0 +1,56 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.table {
+    width: 100%;
+    border-collapse: collapse; 
+    background-color: v.$gris; 
+    border: 1px solid v.$blanco; 
+    border-radius: 10px; 
+    overflow: hidden; 
+
+    th, td {
+        border: 1px solid v.$blanco;    
+        padding: 15px; 
+        text-align: left; 
+        color: v.$blanco; 
+    }
+
+    th {
+        background-color: v.$negro; 
+        font-weight: bold; 
+    }
+
+    tr:hover {
+        background-color: v.$blanco; 
+        color: v.$negro; 
+
+        td {
+            color: v.$negro; 
+            border-color: v.$negro; 
+        }
+    }
+}
+
+.btn {
+    margin-bottom: 20px; 
+    text-align: left; 
+}
+
+.btn-agregar {
+    display: inline-block; 
+    padding: 10px 20px;
+    background-color: v.$negro; 
+    color: v.$blanco; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease; 
+    border: 2px solid v.$negro; 
+    cursor: pointer; 
+}
+
+.btn-agregar:hover {
+    background-color: darken(v.$negro, 10%); 
+    color: v.$blanco; 
+}

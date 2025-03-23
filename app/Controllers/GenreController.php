@@ -35,8 +35,8 @@ class GenreController extends BaseController {
     public static function create(){
         Middlewares::isAuth();
         $data = [
-            "name" => "tapia",
-            "description" => "alo"
+            "name" => "geovas",
+            "description" => "xd"
         ];
         $errors = self::validateData($data);
         if(!empty($errors)) redirect("errores", $errors, "/genre");

@@ -1,12 +1,12 @@
 <?php
 
 
- include __DIR__ . "/../includes/navbar.php" ?>
+include __DIR__ . "/../includes/navbar.php" ?>
 
 <main>
     <div class="contenedor crud-container">
         <h2> Generos </h2>
-    
+
         <?php if (isset($exitos) && !empty($exitos)) : ?>
             <p class="alerta exito"><?php echo $exitos ?></p>
         <?php endif; ?>
@@ -17,19 +17,34 @@
             <p class="alerta mensaje"><?php echo $mensajes ?></p>
         <?php endif; ?>
         <!--inicio de la card-->
-        <?php foreach($genres as $genre):  ?>
-            <div>
-                <p>
-                    <?php echo $genre -> getId() ?>
-                </p>
-                <p>
-                    <?php echo $genre -> getName() ?>
-                </p>
-                <p>
-                    <?php echo $genre -> getDescription() ?>
-                </p>
-            </div>
-        <?php endforeach; ?>
+        <div class="btn">
+            <a href="" class="btn-agregar">Agregar Género</a>
+        </div>
+        <table class="table" rules=”groups”>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (isset($genres) && !empty($genres)) : ?>
+                    <?php foreach ($genres as $genre): ?>
+                        <tr>
+                            <td><?php echo $genre->getId(); ?></td>
+                            <td><?php echo $genre->getName(); ?></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="3" class="td">No existen registros en la base de datos.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
         <!-- fin card-->
     </div>
 </main>
