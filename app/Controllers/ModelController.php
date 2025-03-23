@@ -19,27 +19,28 @@ class ModelController extends BaseController implements CrudInterface
         $data["exitos"] = extractMessages("exitos");
         $data["mensajes"] = extractMessages("mensajes");
         $data["errores"] = extractMessages("errores");
-        $data["consoleModel"] = Model::all();
+        $data["consolesModels"] = Model::all();
         $router->render("consoleModel/index", $data);
     }
 
     public static function create()
     {
         Middlewares::isAuth();
-        if($_SERVER['REQUEST_METHOD'=="POST"]){
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            
             $data = [
                 "name" => $_POST['name']
             ];
             $errors = self::validateData($data);
-            if (!empty($errors)) redirect("errores", $errors, "/consoleModel");
+            if (!empty($errors)) redirect("errores", $errors, "/consoleModelcreate");
             $data = self::sanitizateData($data);
             $console = Model::arrayToObject($data);
             $nameExist = Model::where("name", $console->getName());
-            if (!(is_null($nameExist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/ConsoleModel");
+            if (!(is_null($nameExist))) redirect("errores", ["Modelo Existente en la Base de Datos"], "/consoleModelcreate");
             if (!Model::save($console)) {
-                redirect("errores", ["Error al guardaren la Base de Datos"], "/ConsoleModel");
+                redirect("errores", ["Error al guardaren la Base de Datos"], "/consoleModelcreate");
             }
-            redirect("mensajes", ["Genero creado correctamente"], "/consoleModel");
+            redirect("exitos", ["Modelo creado correctamente"], "/consoleModel");
         }
     }
 

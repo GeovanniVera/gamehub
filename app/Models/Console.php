@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use App\Classes\Database;
+use PDO;
+use PDOException;
+
 class Console extends ActiveRecord{
     protected ?int $id = null;
     protected int $idModel;
@@ -55,5 +59,28 @@ class Console extends ActiveRecord{
 
     public function getReleaseDate(){
         return $this->releaseDate;
+    }
+
+    //Metodo para el join con model
+    public static function joinModel(){
+        try{
+            $conn = Database::getInstance()->getConnection();
+            $query = " SELECT 
+                c.id AS consoleId, 
+                c.name AS consoleName, 
+                c.description AS consoleDescription,
+                c.releaseDate AS releaseDate,
+                m.name AS modelo FROM " . self::getTable() ." AS c 
+                INNER JOIN 
+                console_model AS m ON c.idModel = m.id";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!$res) return [];
+            return $res;
+        }catch(PDOException $e){
+            error_log("Error al recuperar el join");
+
+        }
     }
 }

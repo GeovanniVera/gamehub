@@ -15,7 +15,7 @@ function redirect(string $field,array|object  $array,string $path){
     exit;
 }
 
-function extractMessages(string $value): string{
+function extractMessages($value): string{
     $messages = "";
     if (Session::has($value)) {
         $messages = Session::get($value);

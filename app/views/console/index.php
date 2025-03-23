@@ -31,13 +31,13 @@
                 <?php if (isset($consoles) && !empty($consoles)) : ?>
                     <?php foreach ($consoles as $console):  ?>
                         <tr>
-                            <td><?php echo $console->getId() ?></td>
-                            <td><?php echo $console->getName() ?></td>
-                            <td><?php echo $console->getIdModel() ?></td>
-                            <td><?php echo $console->getReleaseDate() ?></td>
+                            <td><?php echo $console['consoleId'] ?></td>
+                            <td><?php echo $console['consoleName'] ?></td>
+                            <td><?php echo $console['modelo'] ?></td>
+                            <td><?php echo $console['releaseDate'] ?></td>
                             <td><a href="">Detalles</a></td>
                             <td><a href="">Eliminar</a></td>
-                            <td><a href="">Actualizar</a></td>
+                            <td><a href="/consoleUpdate/<?php echo $console['consoleId'] ?>">Actualizar</a></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

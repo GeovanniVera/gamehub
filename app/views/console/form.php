@@ -21,12 +21,31 @@
         <form action="/console" method="post">
             <div class="grupo">
                 <div class="inp">
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="name">Nombre:</label>
+                    <input type="text" placeholder="XBOX" id="name" name="name">
                 </div>
                 <div class="inp">
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="description"></label>
+                    <textarea name="description" id="description"></textarea>
+                </div>
+            </div>
+            <div class="grupo">
+                <div class="inp">
+                    <label for="idModel">Modelo:</label>
+                    <select name="idModel" id="idModel">
+                        <?php if (isset($modelos) && !empty($modelos)) : ?>
+                            <option value="" disabled selected>--selecciona un modelo--</option>
+                            <?php foreach($modelos as $model):?>
+                                <option value="<?php echo $model->getid() ?>"><?php echo $model->getName() ?></option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="" disabled selected>--NO EXISTEN MODELOS--</option>
+                        <?php endif; ?>
+                    </select>
+                </div>
+                <div class="inp">
+                    <label for="releaseDate">Fecha de lanzamiento</label>
+                    <input type="date" name="releaseDate" id="releaseDate">
                 </div>
             </div>
             <div class="grupo">
