@@ -15,7 +15,7 @@
         <?php endif; ?>
         <!--inicio de la tabla-->
         <div class="btn">
-            <a href="" class="btn-agregar">Agregar Modelo de consola</a>
+            <a href="/consoleModelcreate" class="btn-agregar">Agregar Modelo de consola</a>
         </div>
         <table rules=”groups” class="table">
             <thead>

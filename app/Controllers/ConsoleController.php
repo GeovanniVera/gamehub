@@ -43,7 +43,14 @@ class ConsoleController extends BaseController implements CrudInterface {
             redirect("mensajes",["Consola creada correctamente"],"/consoleModel");
         }
     }
-
+    public static function form(Router $router){
+        Middlewares::isAuth();
+        $data = [];
+        $data["exitos"]=extractMessages("exitos");
+        $data["mensajes"]=extractMessages("mensajes");
+        $data["errores"]=extractMessages("errores");
+        $router -> render("console/form", $data);
+    }
     public static function delete()
     {
         

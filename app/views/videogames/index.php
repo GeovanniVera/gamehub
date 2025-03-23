@@ -15,7 +15,7 @@
         <?php endif; ?>
         <!--inicio de la tabla-->
         <div class="btn">
-            <a href="" class="btn-agregar">Agregar Videojuego</a>
+            <a href="/videogamescreate" class="btn-agregar">Agregar Videojuego</a>
         </div>
         <table  rules=”groups” class="table">
             <thead>
