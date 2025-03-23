@@ -50,7 +50,7 @@ class Videogame extends ActiveRecord
             $conn -> beginTransaction();
 
             //creamos el objeto de videojuego
-
+            
 
             //self::create($videogame);
             debuguear($videogame);
