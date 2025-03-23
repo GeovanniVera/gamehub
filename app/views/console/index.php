@@ -14,15 +14,17 @@
             <p class="alerta mensaje"><?php echo $mensajes ?></p>
         <?php endif; ?>
         <!--inicio de la tabla-->
-
-        <table  rules=”groups”>
+        <div class="btn">
+            <a href="" class="btn-agregar">Agregar Consola</a>
+        </div>
+        <table  rules=”groups” class="table">
             <thead>
                 <tr>
-                    <td>id</td>
-                    <td>Nombre</td>
-                    <td>Model</td>
-                    <td>Fecha de lanzamiento:</td>
-                    <td colspan="3">Acciones</td>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Model</th>
+                    <th>Fecha de lanzamiento:</th>
+                    <th colspan="3">Acciones</th>
                 </tr>
             </thead>
             <tbody>
