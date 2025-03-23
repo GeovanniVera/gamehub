@@ -6,7 +6,7 @@ class Database {
     private $db_name = "gamehub";//cambia tu base de datos
     private $username = "gamehub";//cambia tu usuario
     private $password = "gamehub123";//Cambia tu contraseña
-    private $port = "3306";
+    private $port = "3307";
     
     private \PDO $conn; // Propiedad privada
     private static ?self $instance = null; // PHP 7.4+

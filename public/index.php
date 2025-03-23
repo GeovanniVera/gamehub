@@ -9,6 +9,7 @@ use App\Controllers\GenreController;
 use App\Controllers\ConsoleController;
 use App\Controllers\ModelController;
 use App\Controllers\VideogameController;
+use App\Models\Model;
 use App\Models\Videogame;
 use MVC\Router;
 
@@ -34,18 +35,18 @@ $router->get('/genrecreate',[GenreController::class,'form']);
 
 //Consolas
 $router->get('/console',[ConsoleController::class,'index']);
-$router->get('/consoleSave',[ConsoleController::class,'create']);
-$router->get('/consolecreate',[GenreController::class,'form']);
+$router->post('/console',[ConsoleController::class,'create']);
+$router->get('/consolecreate',[ConsoleController::class,'form']);
 
 //Modelo de las consolas
 $router->get('/consoleModel',[ModelController::class,'index']);
-$router->get('/consoleModelcreate',[GenreController::class,'form']);
-$router->get('/consoleModelSave',[ModelController::class,'create']);
+$router->post('/consoleModel',[ModelController::class,'create']);
+$router->get('/consoleModelcreate',[ModelController::class,'form']);
 
 //Modelo de los videojuegos
 $router->get('/videogames',[VideogameController::class,'index']);
-$router->get('/videogamescreate',[GenreController::class,'form']);
-$router->get('/videogamesSave',[VideogameController::class,'create']);
+$router->get('/videogamescreate',[VideogameController::class,'form']);
+$router->post('/videogames',[VideogameController::class,'create']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

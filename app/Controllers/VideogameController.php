@@ -43,6 +43,15 @@ class VideogameController extends BaseController implements CrudInterface
             redirect("mensajes", ["videojeugo creado correctamente"], "/videogame");
         }
     }
+
+    public static function form(Router $router){
+        Middlewares::isAuth();
+        $data = [];
+        $data["exitos"]=extractMessages("exitos");
+        $data["mensajes"]=extractMessages("mensajes");
+        $data["errores"]=extractMessages("errores");
+        $router -> render("videogames/form", $data);
+    }
     public static function delete() {}
 
     public static function update() {}
