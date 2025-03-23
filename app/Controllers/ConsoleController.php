@@ -24,21 +24,24 @@ class ConsoleController extends BaseController implements CrudInterface {
 
     public static function create(){
         Middlewares::isAuth();
-        $data = [
-            "name" => "tapia",
-            "description" => "alo"
-        ];
-        $errors = self::validateData($data);
-        if(!empty($errors)) redirect("errores", $errors, "/console");
-        $data = self::sanitizateData($data);
-        $console = Console::arrayToObject($data);
-        $nameExist = Console::where("name",$console->getName());
-        if(!(is_null($nameExist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/console");
-        if (!Console::save($console)) {
-            redirect("errores", ["Error al guardaren la Base de Datos"], "/ConsoleModel");
-        } 
-        redirect("mensajes",["Consola creada correctamente"],"/consoleModel");
-
+        if($_SERVER['REQUEST_METHOD'=="POST"]){
+            $data = [
+                "name" => $_POST['name'],
+                "description" => $_POST['description'],
+                "idModel" => $_POST['model'],
+                "releaseDate" => $_POST["releaseDate"]
+            ];
+            $errors = self::validateData($data);
+            if(!empty($errors)) redirect("errores", $errors, "/console");
+            $data = self::sanitizateData($data);
+            $console = Console::arrayToObject($data);
+            $nameExist = Console::where("name",$console->getName());
+            if(!(is_null($nameExist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/console");
+            if (!Console::save($console)) {
+                redirect("errores", ["Error al guardaren la Base de Datos"], "/ConsoleModel");
+            } 
+            redirect("mensajes",["Consola creada correctamente"],"/consoleModel");
+        }
     }
 
     public static function delete()

@@ -26,20 +26,22 @@ class VideogameController extends BaseController implements CrudInterface
     public static function create()
     {
         Middlewares::isAuth();
-        $data = [
-            "name" => "tapia",
-            "description" => "alo"
-        ];
-        $errors = self::validateData($data);
-        if (!empty($errors)) redirect("errores", $errors, "/videogame");
-        $data = self::sanitizateData($data);
-        $console = Videogame::arrayToObject($data);
-        $nameExist = Videogame::where("name", $console->getName());
-        if (!(is_null($nameExist))) redirect("errores", ["Videojuego Existente en la Base de Datos"], "/videogame");
-        if (!Videogame::save($console)) {
-            redirect("errores", ["Error al guardaren la Base de Datos"], "/videogame");
+        if($_SERVER['REQUEST_METHOD'=="POST"]){
+            $data = [
+                "name" => "tapia",
+                "description" => "alo"
+            ];
+            $errors = self::validateData($data);
+            if (!empty($errors)) redirect("errores", $errors, "/videogame");
+            $data = self::sanitizateData($data);
+            $console = Videogame::arrayToObject($data);
+            $nameExist = Videogame::where("name", $console->getName());
+            if (!(is_null($nameExist))) redirect("errores", ["Videojuego Existente en la Base de Datos"], "/videogame");
+            if (!Videogame::save($console)) {
+                redirect("errores", ["Error al guardaren la Base de Datos"], "/videogame");
+            }
+            redirect("mensajes", ["videojeugo creado correctamente"], "/videogame");
         }
-        redirect("mensajes", ["videojeugo creado correctamente"], "/videogame");
     }
     public static function delete() {}
 
