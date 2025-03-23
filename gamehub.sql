@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS videogames_consoles (
     id INT PRIMARY KEY AUTO_INCREMENT,
     idVideogame INT NOT NULL,
     idConsole INT NOT NULL,
-    release_date DATE NOT NULL,
+    releaseDate DATE NOT NULL,
     FOREIGN KEY (idVideogame) REFERENCES videogames(id),
     FOREIGN KEY (idConsole) REFERENCES consoles(id)
 );

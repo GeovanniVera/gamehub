@@ -5,12 +5,11 @@ namespace App\Controllers;
 use MVC\Router;
 use App\Controllers\BaseController;
 use App\Classes\Middlewares;
-use App\Classes\Validators;
 use App\Interfaces\CrudInterface;
 use App\Models\Console;
 use App\Models\Genre;
 use App\Models\Videogame;
-
+use App\Services\VideogameServices;
 class VideogameController extends BaseController implements CrudInterface
 {
 
@@ -60,7 +59,8 @@ class VideogameController extends BaseController implements CrudInterface
             if (!(is_null($nameexist))) redirect("errores", ["Videojuego Existente en la Base de Datos"], "/videogames");
             
             //Se guardara el videojuego por medio de una trasaccion
-            if (!Videogame::createVideoGame($videogame,$genres,$consoles)) {
+            $service = new VideogameServices();
+            if (!($service->transactionVideoGame($videogame,$genres,$consoles))) {
                 redirect("errores", ["Error al guardar en la Base de Datos"], "/videogames");
             }
 
