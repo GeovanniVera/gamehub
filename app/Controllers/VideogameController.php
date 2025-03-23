@@ -78,6 +78,24 @@ class VideogameController extends BaseController implements CrudInterface
         $data['consoles']=Console::all();
         $router -> render("videogames/form", $data);
     }
+
+
+    public static function details(Router $router)
+    {
+        Middlewares::isAuth();
+        if($_SERVER['REQUEST_METHOD']=="GET"){
+            $id = $_GET['id'];
+            if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/videogames");
+            $videogame = Videogame::find($_GET['id']);
+            if(is_null($videogame)) redirect("errores",["Registro no existe"],"/videogames");
+            $data=[];
+            $data['videogame']= $videogame;
+            $router->render("videogames/details",$data);
+        }
+    }
+
+
+
     public static function delete()
     {
         Middlewares::isAuth();

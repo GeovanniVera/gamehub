@@ -57,6 +57,7 @@ $router->get('/videogames',[VideogameController::class,'index']);
 $router->post('/videogames',[VideogameController::class,'create']);
 $router->get('/videogamesUpdate',[VideogameController::class,'update']);
 $router->post('/videogamesUpdate',[VideogameController::class,'updateProcess']);
+$router->get('/videogameDetails',[VideogameController::class,'details']);
 $router->get('/videogamesDelete',[VideogameController::class,'delete']);
 $router->get('/videogamescreate',[VideogameController::class,'form']);
 

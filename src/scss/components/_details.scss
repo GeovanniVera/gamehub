@@ -1,0 +1,70 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.card__details {
+    display: flex; 
+    border: 1px solid v.$blanco;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: v.$gris;
+    margin: 20px;
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card__details-icons {
+        display: flex;
+        flex-direction: column; 
+        justify-content: flex-start; 
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: v.$blanco;
+    }
+    
+    .card__details-iconsleft {
+        border-radius: 12px 0 0 12px; 
+    }
+    
+    .card__details-iconsright {
+        border-radius: 0 12px 12px 0; 
+    }
+    
+    .card__details-icons svg {
+        width: 50px;
+        height: 50px;
+        fill: v.$gris;
+    }
+    
+    .card__details-content {
+        flex: 1; 
+        padding: 20px;
+    }
+    
+    .card__details-title {
+        padding: 5px;
+        border-bottom: 1px solid v.$blanco;
+        color: v.$blanco;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    
+    .card__details-title h2 {
+        margin-top: 0; 
+    }
+    
+    .card__details-body {
+        font-size: 1.1rem;
+        color: v.$gris;
+        background-color: v.$negro;
+        padding: 20px;
+    }
+    
+    .card__details-body p {
+        margin: 10px 0;
+    }
+}
+
