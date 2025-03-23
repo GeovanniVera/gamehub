@@ -33,13 +33,13 @@
                             <td><?php echo $consoleModel->getName() ?></td>
                             <td><a href="">Detalles</a></td>
                             <td><a href="">Eliminar</a></td>
-                            <td><a href="">Actualizar</a></td>
+                            <td><a href="/consoleModelUpdate?id=<?php echo $consoleModel->getId() ?>">Actualizar</a></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
                         <td colspan="5">
-                        No existen registros en la base de datos.
+                            No existen registros en la base de datos.
                         </td>
                     </tr>
                 <?php endif; ?>

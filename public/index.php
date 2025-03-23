@@ -40,6 +40,7 @@ $router->get('/consolecreate',[ConsoleController::class,'form']);
 
 //Modelo de las consolas
 $router->get('/consoleModel',[ModelController::class,'index']);
+$router->get('/consoleModelUpdate',[ModelController::class,'update']);
 $router->post('/consoleModel',[ModelController::class,'create']);
 $router->get('/consoleModelcreate',[ModelController::class,'form']);
 

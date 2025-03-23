@@ -18,15 +18,13 @@
             <a href="/consoleModel" class="btn-agregar">Cancelar</a>
         </div>
 
-        <form action="/consolemodel" method="post">
+        <form action="/consoleModel" method="post">
             <div class="grupo">
                 <div class="inp">
-                    <label for=""></label>
-                    <input type="text">
-                </div>
-                <div class="inp">
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="name">
+                        Nombre
+                    </label>
+                    <input type="text" placeholder="Xbox series S" name="name">
                 </div>
             </div>
             <div class="grupo">
