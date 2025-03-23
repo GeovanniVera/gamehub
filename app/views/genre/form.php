@@ -25,12 +25,14 @@ include __DIR__ . "/../includes/navbar.php" ?>
         <form action="/genre" method="post">
             <div class="grupo">
                 <div class="inp">
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="name">
+                        Nombre
+                    </label>
+                    <input type="text" placeholder="Terror, Accion, etc." name="name"
                 </div>
                 <div class="inp">
-                    <label for=""></label>
-                    <input type="text">
+                    <label for="description">Descripcion</label>
+                    <input type="text" placeholder="Descripcion del Genero" name="description">
                 </div>
             </div>
             <div class="grupo">

@@ -6,9 +6,10 @@ use App\Controllers\BaseController;
 use MVC\Router;
 use App\Classes\Middlewares;
 use App\Classes\Validators;
+use App\Interfaces\CrudInterface;
 use App\Models\Genre;
 
-class GenreController extends BaseController {
+class GenreController extends BaseController implements CrudInterface {
 
     /**
      * Metodo que valida datos
@@ -34,18 +35,24 @@ class GenreController extends BaseController {
 
     public static function create(){
         Middlewares::isAuth();
-        $data = [
-            "name" => "geovas",
-            "description" => "xd"
-        ];
-        $errors = self::validateData($data);
-        if(!empty($errors)) redirect("errores", $errors, "/genre");
-        $data = self::sanitizateData($data);
-        $genre = Genre::arrayToObject($data);
-        $nameexist = Genre::where("name",$genre->getName());
-        if(!(is_null($nameexist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/genre");
-        $res = Genre::save($genre);
-        redirect("mensajes",["Genero creado correctamente"],"/genre");
+        if($_SERVER['REQUEST_METHOD']=="POST"){
+            $data = [
+                "name" => $_POST['name'],
+                "description" => $_POST['description'],
+            ];
+            $errors = self::validateData($data);
+            if(!empty($errors)) redirect("errores", $errors, "/genre");
+            $data = self::sanitizateData($data);
+            $genre = Genre::arrayToObject($data);
+            $nameexist = Genre::where("name",$genre->getName());
+            if(!(is_null($nameexist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/genre");
+            if(!Genre::save($genre)){
+                redirect("errores", ["Error al guardar en la base de Datos"], "/genre");
+            }
+            redirect("exitos",["Genero creado correctamente"],"/genre");
+            
+        }
+        
     }
 
     public static function form(Router $router){
@@ -56,4 +63,8 @@ class GenreController extends BaseController {
         $data["errores"]=extractMessages("errores");
         $router -> render("genre/form", $data);
     }
+
+    public static function delete() {}
+
+    public static function update() {}
 }

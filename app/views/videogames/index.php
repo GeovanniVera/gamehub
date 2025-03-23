@@ -32,7 +32,6 @@
                         <tr>
                             <td><?php echo $videogame->getId() ?></td>
                             <td><?php echo $videogame->getName() ?></td>
-                            <td><?php echo $videogame->getIdModel() ?></td>
                             <td><a href="">Detalles</a></td>
                             <td><a href="">Eliminar</a></td>
                             <td><a href="">Actualizar</a></td>
