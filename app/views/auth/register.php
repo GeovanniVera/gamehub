@@ -102,4 +102,4 @@
         </div>
     </div>
 </main>
-<script type="module" src="build/js/registerValidator.js"></script>
+<script type="module" src="./build/js/registerValidator.js"></script>
