@@ -1,5 +1,4 @@
 <?php 
-
 require_once __DIR__ . '/../app/Classes/app.php';
 
 use App\Controllers\AuthController;
@@ -13,52 +12,51 @@ use MVC\Router;
 
 $router = new Router();
 
-//Login 
-$router->get('/',[AuthController::class,'login']);
-$router->post('/',[AuthController::class,'loginProcess']);
-$router->get('/logout',[AuthController::class,'logout']);
+// Login 
+$router->get('/', [AuthController::class, 'login']);
+$router->post('/', [AuthController::class, 'loginProcess']);
+$router->get('/logout', [AuthController::class, 'logout']);
 
+// Crear Cuenta
+$router->get('/register', [RegisterController::class, 'register']);
+$router->post('/register', [RegisterController::class, 'saveUser']);
 
-//Crear Cuenta
-$router->get('/register',[RegisterController::class,'register']);
-$router->post('/register',[RegisterController::class,'saveUser']);
+// Dashboard 
+$router->get('/dashboard', [DashboardController::class, 'index']);
 
-//Dashboard 
-$router->get('/dashboard',[DashboardController::class,'index']);
+// Generos
+$router->get('/genre', [GenreController::class, 'index']);
+$router->post('/genre', [GenreController::class, 'create']);
+$router->get('/genreUpdate/:id', [GenreController::class, 'update']);      // Con parámetro
+$router->post('/genreUpdate/:id', [GenreController::class, 'updateProcess']); // Con parámetro
+$router->get('/genreDelete/:id', [GenreController::class, 'delete']);     // Con parámetro
+$router->get('/genrecreate', [GenreController::class, 'form']);
 
-//Generos
-$router->get('/genre',[GenreController::class,'index']);
-$router->post('/genre',[GenreController::class,'create']);
-$router->get('/genreUpdate',[GenreController::class,'update']);
-$router->post('/genreUpdate',[GenreController::class,'updateProcess']);
-$router->get('/genreDelete',[GenreController::class,'delete']);
-$router->get('/genrecreate',[GenreController::class,'form']);
+// Consolas
+$router->get('/console', [ConsoleController::class, 'index']);
+$router->post('/console', [ConsoleController::class, 'create']);
+$router->get('/consoleUpdate/:id', [ConsoleController::class, 'update']);    // Con parámetro
+$router->post('/consoleUpdate/:id', [ConsoleController::class, 'updateProcess']); // Con parámetro
+$router->get('/consoleDetails/:id', [ConsoleController::class, 'details']);  // Con parámetro
+$router->get('/consoleDelete/:id', [ConsoleController::class, 'delete']);    // Con parámetro
+$router->get('/consolecreate', [ConsoleController::class, 'form']);
 
-//Consolas
-$router->get('/console',[ConsoleController::class,'index']);
-$router->post('/console',[ConsoleController::class,'create']);
-$router->get('/consoleUpdate',[ConsoleController::class,'update']);
-$router->post('/consoleUpdate',[ConsoleController::class,'updateProcess']);
-$router->get('/consoleDetails',[ConsoleController::class,'details']);
-$router->get('/consoleDelete',[ConsoleController::class,'delete']);
-$router->get('/consolecreate',[ConsoleController::class,'form']);
+// Modelo de las consolas
+$router->get('/consoleModel', [ModelController::class, 'index']);
+$router->get('/consoleModelUpdate/:id', [ModelController::class, 'update']);   // Con parámetro
+$router->post('/consoleModelUpdate/:id', [ModelController::class, 'updateProcess']);  // Con parámetro
+$router->get('/consoleModelDelete/:id', [ModelController::class, 'delete']);  // Con parámetro
+$router->post('/consoleModel', [ModelController::class, 'create']);
+$router->get('/consoleModelcreate', [ModelController::class, 'form']);
 
-//Modelo de las consolas
-$router->get('/consoleModel',[ModelController::class,'index']);
-$router->get('/consoleModelUpdate',[ModelController::class,'update']);
-$router->post('/consoleModelUpdate',[ModelController::class,'updateProcess']);
-$router->get('/consoleModelDelete',[ModelController::class,'delete']);
-$router->post('/consoleModel',[ModelController::class,'create']);
-$router->get('/consoleModelcreate',[ModelController::class,'form']);
+// Videojuegos
+$router->get('/videogames', [VideogameController::class, 'index']);
+$router->post('/videogames', [VideogameController::class, 'create']);
+$router->get('/videogamesUpdate/:id', [VideogameController::class, 'update']);    // Con parámetro
+$router->post('/videogamesUpdate/:id', [VideogameController::class, 'updateProcess']); // Con parámetro
+$router->get('/videogameDetails/:id', [VideogameController::class, 'details']);  // Con parámetro
+$router->get('/videogamesDelete/:id', [VideogameController::class, 'delete']);   // Con parámetro
+$router->get('/videogamescreate', [VideogameController::class, 'form']);
 
-//Modelo de los videojuegos
-$router->get('/videogames',[VideogameController::class,'index']);
-$router->post('/videogames',[VideogameController::class,'create']);
-$router->get('/videogamesUpdate',[VideogameController::class,'update']);
-$router->post('/videogamesUpdate',[VideogameController::class,'updateProcess']);
-$router->get('/videogameDetails',[VideogameController::class,'details']);
-$router->get('/videogamesDelete',[VideogameController::class,'delete']);
-$router->get('/videogamescreate',[VideogameController::class,'form']);
-
-// Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
+// Validar rutas
 $router->comprobarRutas();

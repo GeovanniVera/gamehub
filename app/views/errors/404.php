@@ -13,7 +13,7 @@
 <body>
     <div class="contenedor error-container">
         <div class="card">
-            <h2>Eror 404 Not Found</h2>
+            <h2>Error 404 Not Found</h2>
             <a href="/" class="btn">Volver al inicio</a>
         </div>
     </div>
