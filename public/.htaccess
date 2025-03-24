@@ -1,10 +1,10 @@
 RewriteEngine On
 RewriteBase /
 
-# No redirigir archivos estáticos (CSS, JS, imágenes, fuentes, etc.)
+# Ignorar archivos y directorios existentes
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Redirige todas las demás solicitudes a index.php
+# Redirigir todo lo demás a index.php
 RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]

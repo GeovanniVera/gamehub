@@ -20,6 +20,7 @@ $router = new Router();
 
 // Login 
 $router->get('/', [AuthController::class, 'login']);
+$router->get('/login', [AuthController::class, 'login']);
 $router->post('/', [AuthController::class, 'loginProcess']);
 $router->get('/logout', [AuthController::class, 'logout']);
 

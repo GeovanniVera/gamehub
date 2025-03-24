@@ -2,7 +2,7 @@
 <main>
     <div class="contenedor crud-container">
         <h2>Videojuego <?php echo $videogame->getName() ?></h2>
-        <p>Descripción : <?php echo $videogame->getDescriptionn() ?></p>
+        <p>Descripción : <?php echo $videogame->getDescription() ?></p>
 
         <!-- fin card-->
     </div>

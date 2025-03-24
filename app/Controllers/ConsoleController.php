@@ -53,12 +53,12 @@ class ConsoleController extends BaseController implements CrudInterface {
         $data["modelos"]= Model::all();
         $router -> render("console/form", $data);
     }
-    public static function details(Router $router){
+    public static function details(Router $router,$params){
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/console");
-            $console = Console::find($_GET['id']);
+            $console = Console::find($id);
             if(is_null($console)) redirect("errores",["Registro no existe"],"/console");
             $model = Model::find($console->getIdModel());
             $data=[];
@@ -68,11 +68,11 @@ class ConsoleController extends BaseController implements CrudInterface {
         }
         
     }
-    public static function delete()
+    public static function delete(Router $router , $params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD'] =="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/console");
             if(!Console::delete($id)) redirect("errores",["No se pudo eliminar el registro"],"/console");
             redirect("exitos",["Registro Eliminado Correctamente"],"/console");
@@ -80,13 +80,13 @@ class ConsoleController extends BaseController implements CrudInterface {
         
     }
 
-    public static function update(Router $router)
+    public static function update(Router $router,$params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/console");
-            $console = Console::find($_GET['id']);
+            $console = Console::find($id);
             if(is_null($console)) redirect("errores",["Registro no existe"],"/console");
             $data=[];
             $data['console']= $console;

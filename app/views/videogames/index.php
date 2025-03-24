@@ -31,9 +31,9 @@
                         <tr>
                             <td><?php echo $videogame->getId() ?></td>
                             <td><?php echo $videogame->getName() ?></td>
-                            <td><a href="/videogamesDetails?id=<?php echo $videogame->getId()?>"><i class="fas fa-eye view"></i></a></td>
-                            <td><a href="/videogamesDelete?id=<?php echo $videogame->getId()?>"><i class="fas fa-trash trash"></i></a></td>
-                            <td><a href="/videogamesUpdate?id=<?php echo $videogame->getId()?>"><i class="fas fa-pencil-alt update"></a></td>
+                            <td><a href="/videogamesDetails/<?php echo $videogame->getId()?>"><i class="fas fa-eye view"></i></a></td>
+                            <td><a href="/videogamesDelete/<?php echo $videogame->getId()?>"><i class="fas fa-trash trash"></i></a></td>
+                            <td><a href="/videogamesUpdate/<?php echo $videogame->getId()?>"><i class="fas fa-pencil-alt update"></a></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

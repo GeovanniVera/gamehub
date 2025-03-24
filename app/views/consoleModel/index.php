@@ -31,8 +31,8 @@
                         <tr>
                             <td><?php echo $consoleModel->getId() ?></td>
                             <td><?php echo $consoleModel->getName() ?></td>
-                            <td><a href="/consoleModelDelete?id=<?php echo $consoleModel->getId() ?>"><i class="fas fa-trash trash"></i></i></a></td>
-                            <td><a href="/consoleModelUpdate?id=<?php echo $consoleModel->getId() ?>"><i class="fas fa-pencil-alt update"></i></a></td>
+                            <td><a href="/consoleModelDelete/<?php echo $consoleModel->getId() ?>"><i class="fas fa-trash trash"></i></i></a></td>
+                            <td><a href="/consoleModelUpdate/<?php echo $consoleModel->getId() ?>"><i class="fas fa-pencil-alt update"></i></a></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

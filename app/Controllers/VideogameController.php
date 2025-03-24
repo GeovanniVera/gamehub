@@ -80,13 +80,13 @@ class VideogameController extends BaseController implements CrudInterface
     }
 
 
-    public static function details(Router $router)
+    public static function details(Router $router,$params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/videogames");
-            $videogame = Videogame::find($_GET['id']);
+            $videogame = Videogame::find($id);
             if(is_null($videogame)) redirect("errores",["Registro no existe"],"/videogames");
             $data=[];
             $data['videogame']= $videogame;
@@ -96,24 +96,24 @@ class VideogameController extends BaseController implements CrudInterface
 
 
 
-    public static function delete()
+    public static function delete(Router $router, $params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/videogames");
             if(!Videogame::delete($id)) redirect("errores",["No se pudo eliminar el registro"],"/videogames");
             redirect("exitos",["Genero Eliminado Correctamente"],"/videogames");
         }
     }
 
-    public static function update(Router $router)
+    public static function update(Router $router, $params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/videogames");
-            $videogame = Videogame::find($_GET['id']);
+            $videogame = Videogame::find($id);
             if(is_null($videogame)) redirect("errores",["Registro no existe"],"/videogames");
             $data=[];
             $data['videogame']= $videogame;

@@ -56,11 +56,11 @@ class ModelController extends BaseController implements CrudInterface
         $data["errores"] = extractMessages("errores");
         $router->render("consoleModel/form", $data);
     }
-    public static function delete()
+    public static function delete(Router $router, $params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD'] =="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/consoleModel");
             $consolesCount = Console::where('idModel', $id); 
             if ($consolesCount)  redirect("errores",["El registro que intentas eliminar tiene datos asociados "],"/consoleModel");
@@ -69,13 +69,13 @@ class ModelController extends BaseController implements CrudInterface
         }
     }
 
-    public static function update(Router $router)
+    public static function update(Router $router, $params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/consoleModel");
-            $model = Model::find($_GET['id']);
+            $model = Model::find($id);
             if(is_null($model)) redirect("errores",["Registro no existe"],"/consoleModel");
             $data=[];
             $data["model"]= $model;

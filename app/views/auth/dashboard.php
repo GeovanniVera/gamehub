@@ -5,12 +5,15 @@
         <h2>Ultimos Agregados </h2>
         <!--inicio de la card-->
         <div class="cards">
-
-            <div class="card red">
-                <p class="tip">Gears of War day E</p>
-                <p class="second-text">Descripcion Aqui</p>
-                <a href="/" class="button">ver mas</a>
-            </div>
+            <?php if (isset($videogames) && !empty($videogames)): ?>
+                <?php foreach ($videogames as $videogame): ?>
+                    <div class="card red">
+                        <p class="tip"><?php echo $videogame->getName() ?></p>
+                        <p class="second-text"> <?php echo $videogame->getDescription()?></p>
+                        <a href="/videogameDetails/<?php echo $videogame->getId() ?>" class="button">ver mas</a>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
         <!-- fin card-->
     </div>

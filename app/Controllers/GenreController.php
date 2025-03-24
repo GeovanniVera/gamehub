@@ -64,24 +64,24 @@ class GenreController extends BaseController implements CrudInterface {
         $router -> render("genre/form", $data);
     }
 
-    public static function delete()
+    public static function delete(Router $router, $params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/genre");
             if(!Genre::delete($id)) redirect("errores",["No se pudo eliminar el registro"],"/genre");
             redirect("exitos",["Genero Eliminado Correctamente"],"/genre");
         }
     }
 
-    public static function update(Router $router)
+    public static function update(Router $router, $params)
     {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="GET"){
-            $id = $_GET['id'];
+            $id =(int) $params['id'];
             if(!is_numeric($id)) redirect("errores",["Registro no valido"],"/genre");
-            $genre = Genre::find($_GET['id']);
+            $genre = Genre::find($id);
             if(is_null($genre)) redirect("errores",["Registro no existe"],"/genre");
             $data=[];
             $data['genre']= $genre;
