@@ -5,7 +5,7 @@ class Database {
     private $host = "localhost";
     private $db_name = "gamehub";//cambia tu base de datos
     private $username = "gamehub";//cambia tu usuario
-    private $password = "gamehub123";//Cambia tu contraseña
+    private $password = "Gamehub123@";//Cambia tu contraseña
     private $port = "3306";
     
     private \PDO $conn; // Propiedad privada
