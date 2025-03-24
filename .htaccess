@@ -1,15 +1,10 @@
 RewriteEngine On
+RewriteBase /
 
-# Redirige todo a index.php (excepto archivos y carpetas reales)
+# Si la URL está vacía, redirigir a la carpeta public/
+RewriteRule ^$ public/ [L]
+
+# Si el archivo o directorio no existe, reescribe la URL para que apunte a public/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
-
-# Activa mod_rewrite si no está activado
-<IfModule mod_rewrite.c>
-    RewriteBase /
-    RewriteRule ^index\.php$ - [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule . /index.php [L]
-</IfModule>
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
