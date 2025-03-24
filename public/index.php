@@ -9,7 +9,6 @@ use App\Controllers\GenreController;
 use App\Controllers\ConsoleController;
 use App\Controllers\ModelController;
 use App\Controllers\VideogameController;
-use App\Models\Videogame;
 use MVC\Router;
 
 $router = new Router();
