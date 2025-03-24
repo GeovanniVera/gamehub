@@ -8,5 +8,3 @@ RewriteRule ^ - [L]
 
 # Redirige todas las demás solicitudes a index.php
 RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
-
-
