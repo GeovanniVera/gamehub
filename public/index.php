@@ -10,6 +10,12 @@ use App\Controllers\ModelController;
 use App\Controllers\VideogameController;
 use MVC\Router;
 
+// Permitir la carga de archivos estáticos sin pasarlos por el Router
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+if (preg_match('/\.(?:js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|otf)$/', $uri)) {
+    return false; // Detiene la ejecución y permite que el servidor sirva el archivo directamente
+}
+
 $router = new Router();
 
 // Login 

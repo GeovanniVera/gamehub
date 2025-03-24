@@ -11,6 +11,6 @@
     <link rel="icon" href="build/img/control.png" type="image/x-icon">
 </head>
 <body>
-    <?php echo $contenido; ?>
+    <?php echo $contenido;?>
 </body>
 </html>
