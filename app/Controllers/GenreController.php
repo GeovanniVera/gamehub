@@ -19,7 +19,6 @@ class GenreController extends BaseController implements CrudInterface {
     protected static function validateData($data){
         $errors = [];
         $errors[] = self::validateEmpties($data);
-        $errors[] = Validators::alfa($data["name"], "nombre");
         return array_filter($errors);
     }
 

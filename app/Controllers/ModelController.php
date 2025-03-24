@@ -103,7 +103,6 @@ class ModelController extends BaseController implements CrudInterface
     {
         $errors = [];
         $errors[] = self::validateEmpties($data);
-        $errors[] = Validators::alfa($data["name"], "nombre");
         return array_filter($errors);
     }
 }
