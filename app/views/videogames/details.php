@@ -1,8 +1,8 @@
 <?php include __DIR__ ."/../includes/navbar.php" ?>
 <main>
     <div class="contenedor crud-container">
-        <h2>Videojuego <?php echo $videogame->getName() ?></h2>
-        <p>Descripción : <?php echo $videogame->getDescription() ?></p>
+        <h2><?php echo $videogame->getName() ?></h2>
+        <p><?php echo $videogame->getDescription() ?></p>
 
         <!-- fin card-->
     </div>

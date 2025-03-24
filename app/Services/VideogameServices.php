@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Classes\Database;
-use App\Models\Console;
 use App\Models\Videogame;
 use App\Models\VideogameConsole;
 use App\Models\VideogameGenre;
