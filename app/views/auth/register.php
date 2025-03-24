@@ -101,5 +101,5 @@
 
         </div>
     </div>
+    <script type="module" src="./build/js/registerValidator.js"></script>
 </main>
-<script type="module" src="./build/js/registerValidator.js"></script>
