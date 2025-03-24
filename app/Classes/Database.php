@@ -2,9 +2,10 @@
 namespace App\Classes;
 
 class Database {
-    private $host = "localhost";
-    private $db_name = "gamehub";//cambia tu base de datos
-    private $username = "gamehub";//cambia tu usuario
+    //private $host = "localhost";
+    private $host = "restteach.com";
+    private $db_name = "u495355943_gamehub";//cambia tu base de datos
+    private $username = "u495355943_gamehub";//cambia tu usuario
     private $password = "Gamehub123@";//Cambia tu contraseña
     private $port = "3306";
     
