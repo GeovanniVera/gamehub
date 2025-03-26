@@ -3,21 +3,13 @@
 <main>
     <div class="contenedor crud-container">
         <h2> Consolas </h2>
+        <?php include __DIR__.'/../includes/alertas.php'; ?>
 
-        <?php if (isset($exitos) && !empty($exitos)) : ?>
-            <p class="alerta exito"><?php echo $exitos ?></p>
-        <?php endif; ?>
-        <?php if (isset($errores) && !empty($errores)) : ?>
-            <p class="alerta error"><?php echo $errores ?></p>
-        <?php endif; ?>
-        <?php if (isset($mensajes) && !empty($mensajes)) : ?>
-            <p class="alerta mensaje"><?php echo $mensajes ?></p>
-        <?php endif; ?>
         <!--inicio de la tabla-->
         <div class="btn">
             <a href="/consolecreate" class="btn-agregar">Agregar Consola</a>
         </div>
-        <table  rules=”groups” class="table">
+        <table rules=”groups” class="table">
             <thead>
                 <tr>
                     <th>id</th>
@@ -43,7 +35,7 @@
                 <?php else: ?>
                     <tr>
                         <td colspan="5">
-                        No existen registros en la base de datos.
+                            No existen registros en la base de datos.
                         </td>
                     </tr>
                 <?php endif; ?>

@@ -46,14 +46,6 @@ abstract class BaseController{
             $sanitizedValue = $value !== null
                 ? htmlspecialchars(trim($value), ENT_QUOTES, 'UTF-8')
                 : null;
-
-            // Sanitización especial para 'id'
-            if ($key === 'id') {
-                $sanitizedValue = ($sanitizedValue !== null && $sanitizedValue !== '')
-                    ? (int) $sanitizedValue  // Convertir a entero
-                    : null;
-            }
-
             $data[$key] = $sanitizedValue;
         }
         return $data;

@@ -25,10 +25,7 @@ class AuthController extends BaseController{
     public static function loginProcess(){
         Middlewares::isGuest();
         if($_SERVER['REQUEST_METHOD']=="POST"){
-            $data = [
-                "email" => $_POST['email'],
-                "password"=> $_POST['password']
-            ];
+            $data = ["email" => $_POST['email'],"password"=> $_POST['password']];
             $errors = self::validateData($data);
             if(!empty($errors))redirect("errores",$errors,"/");
             $data = self::sanitizateData($data);

@@ -15,17 +15,12 @@ function redirect(string $field,array|object  $array,string $path){
     exit;
 }
 
-function extractMessages($value): string{
+function extractMessages($value){
     $messages = "";
     if (Session::has($value)) {
         $messages = Session::get($value);
         Session::delete($value);
     }
-    if (is_array($messages)) {
-        return implode("\n", $messages); 
-    } elseif (is_string($messages)) {
-        return $messages;
-    } else {
-        return "";
-    }
+
+    return $messages;
 }

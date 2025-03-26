@@ -4,15 +4,8 @@
     <div class="contenedor crud-container">
         <h2> Modelos de consolas </h2>
 
-        <?php if (isset($exitos) && !empty($exitos)) : ?>
-            <p class="alerta exito"><?php echo $exitos ?></p>
-        <?php endif; ?>
-        <?php if (isset($errores) && !empty($errores)) : ?>
-            <p class="alerta error"><?php echo $errores ?></p>
-        <?php endif; ?>
-        <?php if (isset($mensajes) && !empty($mensajes)) : ?>
-            <p class="alerta mensaje"><?php echo $mensajes ?></p>
-        <?php endif; ?>
+        <?php include __DIR__.'/../includes/alertas.php'; ?>
+
         <!--inicio de la tabla-->
         <div class="btn">
             <a href="/consoleModelcreate" class="btn-agregar">Agregar Modelo de consola</a>

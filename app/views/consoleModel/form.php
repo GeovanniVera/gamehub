@@ -3,31 +3,22 @@
 <main>
     <div class="contenedor crud-container">
         <h2> Formulario de Modelos de Consolas </h2>
-
-        <?php if (isset($exitos) && !empty($exitos)) : ?>
-            <p class="alerta exito"><?php echo $exitos ?></p>
-        <?php endif; ?>
-        <?php if (isset($errores) && !empty($errores)) : ?>
-            <p class="alerta error"><?php echo $errores ?></p>
-        <?php endif; ?>
-        <?php if (isset($mensajes) && !empty($mensajes)) : ?>
-            <p class="alerta mensaje"><?php echo $mensajes ?></p>
-        <?php endif; ?>
+        <?php include __DIR__.'/../includes/alertas.php'; ?>
         <!--inicio de la tabla-->
         <div class="btn">
             <a href="/consoleModel" class="btn-agregar">Cancelar</a>
         </div>
 
-        <form action="<?php echo isset($model) && !empty($model) ? '/consoleModelUpdate':'/consoleModel' ?>" method="post" class="form-crud">
-            <?php if(isset($model) && !empty($model)): ?>
-                    <div class="grupo">
-                        <input type="hidden" name="id" value="<?php echo $model->getId() ?>">
-                    </div>
-                <?php endif; ?>
-            
+        <form action="<?php echo isset($model) && !empty($model) ? '/consoleModelUpdate' : '/consoleModel' ?>" method="post" class="form-crud">
+            <?php if (isset($model) && !empty($model)): ?>
+                <div class="grupo">
+                    <input type="hidden" name="id" value="<?php echo $model->getId() ?>">
+                </div>
+            <?php endif; ?>
+
             <div class="grupo">
                 <div class="campos">
-                <label for="name">
+                    <label for="name">
                         Modelo de consola:
                     </label>
                     <div class="inp">

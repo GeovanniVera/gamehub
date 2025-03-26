@@ -38,14 +38,13 @@ class VideogameController extends BaseController implements CrudInterface
             ];
 
             $genres['id'] = $_POST['genres'];
-
             $consoles['id'] = $_POST['consoles'];
             $consoles['releaseDate'] = $_POST['releaseDate'];
 
+            $data = [$videogame,$consoles,$genres];
             //se validan los datos
-            $errors = self::validateData($videogame);
-            $errors = self::validateData($consoles);
-            $errors = self::validateData($genres);
+            $errors[] = self::validateData($data);
+
 
             if (!empty($errors)) redirect("errores", $errors, "/videogamescreate");
 
@@ -143,7 +142,10 @@ class VideogameController extends BaseController implements CrudInterface
     protected static function validateData($data)
     {
         $errors = [];
-        $errors[] = self::validateEmpties($data);
+        foreach( $data as $d){
+            
+            $errors = array_merge($errors,self::validateEmpties($d));    
+        }
         return array_filter($errors);
     }
 }

@@ -6,16 +6,7 @@ include __DIR__ . "/../includes/navbar.php" ?>
 <main>
     <div class="contenedor crud-container">
         <h2> Generos </h2>
-
-        <?php if (isset($exitos) && !empty($exitos)) : ?>
-            <p class="alerta exito"><?php echo $exitos ?></p>
-        <?php endif; ?>
-        <?php if (isset($errores) && !empty($errores)) : ?>
-            <p class="alerta error"><?php echo $errores ?></p>
-        <?php endif; ?>
-        <?php if (isset($mensajes) && !empty($mensajes)) : ?>
-            <p class="alerta mensaje"><?php echo $mensajes ?></p>
-        <?php endif; ?>
+        <?php include __DIR__.'/../includes/alertas.php'; ?>
         <!--inicio de la card-->
         <div class="btn">
             <a href="/genre" class="btn-agregar">Cancelar</a>

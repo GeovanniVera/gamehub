@@ -27,7 +27,7 @@ class GenreController extends BaseController implements CrudInterface {
         $data = [];
         $data["exitos"]=extractMessages("exitos");
         $data["mensajes"]=extractMessages("mensajes");
-        $data["errores"]=extractMessages("errores");
+        $data["errores"] = extractMessages("errores");
         $data["genres"] = Genre::all();
         $router -> render("genre/index", $data);
     }
@@ -40,11 +40,11 @@ class GenreController extends BaseController implements CrudInterface {
                 "description" => $_POST['description'],
             ];
             $errors = self::validateData($data);
-            if(!empty($errors)) redirect("errores", $errors, "/genre");
+            if(!empty($errors)) redirect("errores", $errors, "/genrecreate");
             $data = self::sanitizateData($data);
             $genre = Genre::arrayToObject($data);
             $nameexist = Genre::where("name",$genre->getName());
-            if(!(is_null($nameexist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/genre");
+            if(!(is_null($nameexist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/genrecreate");
             if(!Genre::save($genre)){
                 redirect("errores", ["Error al guardar en la base de Datos"], "/genre");
             }
