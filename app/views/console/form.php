@@ -6,13 +6,17 @@ include __DIR__ . '/../includes/navbar.php' ?>
     <div class="contenedor crud-container">
         <h2> Formulario de Consolas </h2>
 
-        <?php include __DIR__.'/../includes/alertas.php'; ?>
+        <?php include __DIR__ . '/../includes/alertas.php'; ?>
 
         <div class="btn">
             <a href="/console" class="btn-agregar">Cancelar</a>
         </div>
 
-        <form action="<?php echo isset($console) && !empty($console) ? '/consoleUpdate' : '/console' ?>" method="post" class="form-crud">
+        <form
+            action="<?php echo isset($console) && !empty($console) ? '/consoleUpdate' : '/console' ?>"
+            method="post"
+            class="form-crud"
+            id="consoleForm">
             <div class="grupo">
                 <?php if (isset($console) && !empty($console)): ?>
                     <input type="hidden" name="id" value="<?php echo $console->getId() ?>">
@@ -20,7 +24,11 @@ include __DIR__ . '/../includes/navbar.php' ?>
             </div>
             <div class="grupo">
                 <div class="campos">
-                    <label for="name">Nombre:</label>
+                    <label
+                        for="name"
+                        id="label-name">
+                        Nombre:
+                    </label>
                     <div class="inp">
                         <input
                             type="text"
@@ -32,7 +40,11 @@ include __DIR__ . '/../includes/navbar.php' ?>
                     <span id="nameError" class="error-message"></span>
                 </div>
                 <div class="campos">
-                    <label for="description">Descripción:</label>
+                    <label 
+                        id="label-description" 
+                        for="description">
+                        Descripción:
+                    </label>
                     <div class="text">
                         <textarea name="description" id="description"><?php echo isset($console) && !empty($console) ? htmlspecialchars($console->getDescription()) : '' ?></textarea>
                     </div>
@@ -74,6 +86,7 @@ include __DIR__ . '/../includes/navbar.php' ?>
             </div>
         </form>
     </div>
+    <script type="module" src="/build/js/consoleValidador.js"></script>
 </main>
 
 <?php include __DIR__ . '/../includes/footer.php' ?>

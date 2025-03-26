@@ -41,9 +41,9 @@ class VideogameController extends BaseController implements CrudInterface
             $consoles['id'] = $_POST['consoles'];
             $consoles['releaseDate'] = $_POST['releaseDate'];
 
-            $data = [$videogame,$consoles,$genres];
+            $data = [$videogame];
             //se validan los datos
-            $errors[] = self::validateData($data);
+            $errors = self::validateData($data);
 
 
             if (!empty($errors)) redirect("errores", $errors, "/videogamescreate");

@@ -52,12 +52,18 @@
                     padding: 1.5rem 0.5rem;
 
                 }
+
+                option {
+                    background-color: black;  /* Fondo negro de las opciones */
+                    color: white;             /* Texto blanco */
+                }
+                
             }
 
             .text {
                 textarea {
                     margin-top: 2rem;
-
+                    margin-bottom: 1rem;
                     width: 100%;
                     height: 20rem;
                     background-color: transparent;
@@ -71,6 +77,8 @@
                 display: flex;
                 justify-content: center;
                 width: 100%;
+                margin-bottom: 1rem;
+
             }
 
             input[type="date"]::-webkit-calendar-picker-indicator {

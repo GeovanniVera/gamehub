@@ -3,34 +3,64 @@
 <main>
     <div class="contenedor crud-container">
         <h2> Formulario de Videojuegos </h2>
-        <?php include __DIR__.'/../includes/alertas.php'; ?>
+        <?php include __DIR__ . '/../includes/alertas.php'; ?>
         <div class="btn">
             <a href="/videogames" class="btn-agregar">Cancelar</a>
         </div>
         <div class="card">
-            <form class="form-crud" action="<?php echo isset($videogame) && !empty($videogame) ? '/videogamesUpdate' : '/videogames' ?>" method="post">
-                <div class="grupo">
+            <form
+                class="form-crud"
+                action="<?php echo isset($videogame) && !empty($videogame) ? '/videogamesUpdate' : '/videogames' ?>"
+                method="post">
+                <div
+                    class="grupo">
                     <?php if (isset($videogame) && !empty($videogame)): ?>
-                        <input type="hidden" name="id" value="<?php echo $videogame->getId() ?>">
+                        <input
+                            type="hidden"
+                            name="id"
+                            value="<?php echo $videogame->getId() ?>">
                     <?php endif; ?>
                 </div>
                 <div class="grupo">
                     <div class="campos">
-                        <label for="name">Nombre del Videojuego</label>
+                        <label
+                            for="name"
+                            id="label-name">
+                            Nombre del Videojuego
+                        </label>
                         <div class="inp">
-                            <input type="text" placeholder="Minecraft, Halo, etc" name="name" value="<?php echo isset($videogame) && !empty($videogame) ? htmlspecialchars($videogame->getName()) : '' ?>">
+                            <input
+                                type="text"
+                                placeholder="Minecraft, Halo, etc"
+                                name="name"
+                                value="<?php echo isset($videogame) && !empty($videogame) ? htmlspecialchars($videogame->getName()) : '' ?>"
+                                id="name">
                         </div>
                     </div>
                     <div class="campos">
-                        <label for="description">Descripción</label>
+                        <label
+                            for="description"
+                            id="label-description">
+                            Descripción
+                        </label>
                         <div class="text">
-                            <textarea name="description" id="description"> <?php echo isset($videogame) && !empty($videogame) ? htmlspecialchars($videogame->getDescription()) : '' ?></textarea>
+                            <textarea
+                                name="description"
+                                id="description">
+                                <?php echo isset($videogame) && !empty($videogame) ? htmlspecialchars($videogame->getDescription()) : '' ?>
+                            </textarea>
                         </div>
                     </div>
                     <div class="campos">
-                        <label for="releaseDate">Fecha de lanzamiento</label>
+                        <label
+                            for="releaseDate"
+                            id="label-releaseDate">
+                            Fecha de lanzamiento</label>
                         <div class="inp">
-                            <input type="date" name="releaseDate" id="releaseDate">
+                            <input
+                                type="date"
+                                name="releaseDate"
+                                id="releaseDate">
                         </div>
                     </div>
                 </div>
@@ -115,12 +145,14 @@
                 </div>
                 <div class="grupo">
                     <div class="campos">
-                        <input type="submit" value="Guardar" class="submit">
+                        <input
+                            type="submit"
+                            value="Guardar"
+                            class="submit">
                     </div>
                 </div>
             </form>
         </div>
-        </div>
+    </div>
 </main>
-
 <?php include __DIR__ . '/../includes/footer.php' ?>
