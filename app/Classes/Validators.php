@@ -16,6 +16,13 @@ class Validators
             : "";
     }
 
+    public static function alfanumeric($value, $field)
+    {
+        return !preg_match("/^[A-Za-záéíóúÁÉÍÓÚñÑüÜ0-9\s:'\-&]+$/", $value) 
+            ? "El campo $field solo puede contener letra, numeros y espacios." 
+            : "";
+    }
+
     public static function email($value, $fieldName)
     {
         return !filter_var($value, FILTER_VALIDATE_EMAIL) 

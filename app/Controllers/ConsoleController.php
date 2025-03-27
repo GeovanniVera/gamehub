@@ -38,7 +38,8 @@ class ConsoleController extends BaseController implements CrudInterface {
             $console = Console::arrayToObject($data);
             $nameExist = Console::where("name",$console->getName());
             if(!(is_null($nameExist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/consolecreate");
-            if (!Console::save($console)) {
+            $save = Console::save($console);
+            if (!$save) {
                 redirect("errores", ["Error al guardar en la Base de Datos"], "/consolecreate");
             } 
             redirect("exitos",["Consola creada correctamente"],"/console");
@@ -115,6 +116,8 @@ class ConsoleController extends BaseController implements CrudInterface {
     protected static function validateData($data){
         $errors = [];
         $errors[] = self::validateEmpties($data);
+        $errors[] = Validators::alfanumeric($data['name'],'nombre');
+        $errors[] = Validators::alfanumeric($data['descrition'],'descricion');
         return array_filter($errors);
     }
 }
