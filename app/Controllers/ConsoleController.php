@@ -102,7 +102,8 @@ class ConsoleController extends BaseController implements CrudInterface {
         Middlewares::isAuth();
         if($_SERVER['REQUEST_METHOD']=="POST"){
             $console = Console::arrayToObject($_POST);
-            if(!Console::save($console)) redirect("errores",["El registro no se pudo actualizar"],"/console");
+            $save = Console::save($console);
+            if(!$save) redirect("errores",["El registro no se pudo actualizar"],"/console");
             redirect("exitos",["Consola actualizada correctamente"],"/console");
         }
     }
