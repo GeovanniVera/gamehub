@@ -69,7 +69,6 @@ include __DIR__ . "/../includes/navbar.php" ?>
                         <input
                             type="submit"
                             value="Guardar"
-                            disabled
                             class="submit">
                     </div>
                 </div>
