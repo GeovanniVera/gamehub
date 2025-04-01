@@ -57,4 +57,3 @@
         </div>
     </div>
 </main>
-<script type="module" src="/build/js/loginValidator.js"></script>
