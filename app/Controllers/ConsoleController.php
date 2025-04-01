@@ -118,7 +118,7 @@ class ConsoleController extends BaseController implements CrudInterface {
         $errors = [];
         $errors[] = self::validateEmpties($data);
         $errors[] = Validators::alfanumeric($data['name'],'nombre');
-        $errors[] = Validators::alfanumeric($data['descrition'],'descricion');
+        $errors[] = Validators::alfanumeric($data['description'],'descripcion');
         return array_filter($errors);
     }
 }
