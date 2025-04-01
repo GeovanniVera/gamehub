@@ -35,7 +35,7 @@
                             class="form-control"
                             autocomplete="off"
                             placeholder="Contraseña"
-                            disabled>
+                            >
                     </div>
                     <span id="passwordError" class="error-message"></span>
 
