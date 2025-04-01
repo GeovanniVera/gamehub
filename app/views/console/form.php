@@ -87,5 +87,6 @@ include __DIR__ . '/../includes/navbar.php' ?>
         </form>
     </div>
 </main>
+<script type="module" src="build/js/consoleValidador.js"></script>
 
 <?php include __DIR__ . '/../includes/footer.php' ?>

@@ -35,7 +35,7 @@
                             class="form-control"
                             autocomplete="off"
                             placeholder="Contraseña"
-                            >
+                            disabled>
                     </div>
                     <span id="passwordError" class="error-message"></span>
 
@@ -56,4 +56,5 @@
             </div>
         </div>
     </div>
+    <script type="module" src="build/js/loginValidator.js"></script>
 </main>

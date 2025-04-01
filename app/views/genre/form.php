@@ -76,4 +76,5 @@ include __DIR__ . "/../includes/navbar.php" ?>
         <!-- fin card-->
     </div>
 </main>
+<script type="module" src="build/js/generosValidador.js"></script>
 <?php include __DIR__ . "/../includes/footer.php" ?>

@@ -103,7 +103,9 @@
                     ¿ya tienes cuenta? inicia sesion.
                 </a>
             </div>
-
+            
         </div>
     </div>
+    <script type="module" src="build/js/registerValidator.js"></script>
+
 </main>
