@@ -37,7 +37,7 @@ class ConsoleController extends BaseController implements CrudInterface {
             $data = self::sanitizateData($data);
             $console = Console::arrayToObject($data);
             $nameExist = Console::where("name",$console->getName());
-            if(!(is_null($nameExist))) redirect("errores", ["Genero Existente en la Base de Datos"], "/consolecreate");
+            if(!(is_null($nameExist))) redirect("errores", ["Console Existente en la Base de Datos"], "/consolecreate");
             $save = Console::save($console);
             if (!$save) {
                 redirect("errores", ["Error al guardar en la Base de Datos"], "/consolecreate");
